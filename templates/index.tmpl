@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Go by Example</title>
+    <link rel=stylesheet href="site.css">
+  </head>
+  <body>
+    <div id="intro">
+      <h2><a href="./">Go by Example</a></h2>
+      <p>
+        <a href="https://go.dev">Go</a> là một
+        ngôn ngữ lập trình mã nguồn mở được thiết kế để
+        xây dựng phần mềm đơn giản, nhanh chóng và đáng tin cậy.
+        Vui lòng đọc 
+        <a href="https://go.dev/doc/tutorial/getting-started">tài liệu chính thức</a>     
+        để tìm hiểu một chút về mã nguồn Go, các gói công cụ và mô-đun.
+      </p>
+
+      <p>
+        <em>Go by Example</em> là một hướng dẫn bằng cách thực hành
+        với Go sử dụng các ví dụ được chú thích rõ ràng. Hãy xem
+        <a href="hello-world">ví dụ đầu tiên</a> hoặc
+        duyệt qua danh sách bên dưới.
+      </p>
+
+      <ul>
+      {{range .}}
+        <li><a href="{{.ID}}">{{.Name}}</a></li>
+      {{end}}
+      </ul>
+{{ template "footer" }}
+    </div>
+  </body>
+</html>
