@@ -1,7 +1,9 @@
-# Chương trình được thực thi sẽ hiển thị 5 tác vụ được thực thi bởi 
-# các worker khác nhau. Chương trình chỉ mất khoảng 2 giây để thực thi, 
-# mặc dù nó thực hiện các tác vụ trong khoảng tổng cộng là 5 giây, 
-# vì có 3 worker chạy song song.
+# Chương trình được thực thi sẽ 
+# hiển thị 5 tác vụ được thực thi bởi
+# các worker khác nhau. Chương trình 
+# chỉ mất khoảng 2 giây để thực thi, mặc dù
+# nó thực hiện các tác vụ trong khoảng
+# tổng cộng là 5 giây, vì có 3 worker chạy song song.
 $ time go run worker-pools.go 
 worker 1 started  job 1
 worker 2 started  job 2
