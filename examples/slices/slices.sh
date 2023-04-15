@@ -1,5 +1,5 @@
-# Lưu ý rằng dù slice khác với array,
-# nhưng được thể hiện cùng dạng với array khi sử dụng `fmt.Println`.
+# Lưu ý rằng dù slice khác với array, nhưng được 
+# thể hiện cùng dạng với array khi sử dụng `fmt.Println`.
 $ go run slices.go
 emp: [  ]
 set: [a b c]
@@ -17,5 +17,6 @@ dcl: [g h i]
 # để biết thêm nhiều chi tiết về thiết kế và 
 # thực hiện mảng trong Go.
 
-# Bây giờ chúng ta đã xem qua arrays và slices, chúng ta sẽ
-# xem qua cấu trúc dữ liệu quan trọng khác của Go: maps.
+# Bây giờ chúng ta đã xem qua arrays và slices, 
+# chúng ta sẽ xem qua cấu trúc dữ liệu 
+# quan trọng khác của Go: maps.
