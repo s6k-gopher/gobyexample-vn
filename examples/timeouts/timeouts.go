@@ -15,7 +15,7 @@ func main() {
 	// Ví dụ, giả sử chúng ta đang thực hiện gọi một hàm
 	// bên ngoài và trả về kết quả của nó trên channel `c1`
 	// sau 2 giây. Lưu ý rằng channel được lưu vào bộ nhớ đệm, vì vậy
-	// gửi trong goroutine là không chặn. Đây là cách phổ biến để ngăn chặn
+	// gửi/nhận trong goroutine là không chặn. Đây là cách phổ biến để ngăn chặn
 	// rò rỉ goroutine trong trường hợp channel không bao giờ được đọc.
 	c1 := make(chan string, 1)
 	go func() {
@@ -27,21 +27,21 @@ func main() {
 	// `res := <-c1` chờ kết quả trả về từ c1 và `<-time.After`
 	// chờ kết quả trả về sau 1 giây.
 	// Vì `select` sẽ lựa chọn trường hợp đầu tiên
-	// thực thi thành công, Chúng ta sẽ nhận trường hợp timeout
-	// nếu các thao tác thực thi lâu hơn 1 giây cho phép.
-	// (c1 mất 2 giây để trả về kết quả)
+	// nhận được giá trị trả về, Chúng ta sẽ nhận trường hợp timeout
+	// nếu các thao tác khác thực thi lâu hơn 1 giây cho phép.
+	// (mất 2 giây để nhận được giá trị từ `c1`)
 	select {
-	// Mất 2 giây để nhận được kết quả từ `c1`
+	// Mất 2 giây để nhận được giá trị từ `c1`
 	case res := <-c1:
 		fmt.Println(res)
-	// Mất 1 giây để nhận được kết qua từ `time.After`
+	// Mất 1 giây để nhận được giá trị từ `time.After`
 	case <-time.After(1 * time.Second):
 		fmt.Println("timeout 1")
 	}
 
-	// Nếu chúng ta tăng timeout lên 3 giây, thì
-	// chúng ta sẽ nhận được kết quả từ `c2` và in ra kết quả.
-	// (c2 mất 2 giây để trả về kết quả)
+	// Nếu chúng ta nâng timeout lên 3 giây, thì
+	// chúng ta sẽ nhận được giá trị từ `c2` trước và in ra `result 2`.
+	// (mất 3 giây để nhận được giá trị từ `<-time.After(3 * time.Second)`)
 	c2 := make(chan string, 1)
 	go func() {
 		time.Sleep(2 * time.Second)
