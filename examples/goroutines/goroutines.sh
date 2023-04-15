@@ -1,8 +1,9 @@
 # Khi chúng ta chạy chương trình này, chúng ta sẽ thấy
 # đầu tiên là kết quả của lần gọi đồng bộ, sau đó là
-# kết quả của hai goroutines. Kết quả của các goroutines' 
-# có thể được xen kẽ lẫn nhau vì các goroutine đang được
-# thực thi song song bởi Go runtime.
+# kết quả của hai goroutines. Kết quả của các 
+# goroutines' có thể được xen kẽ lẫn nhau vì các 
+# goroutine đang được thực thi song song bởi 
+# Go runtime.
 $ go run goroutines.go
 direct : 0
 direct : 1
