@@ -1,6 +1,6 @@
 // Go hỗ trợ _embedding_ của structs and interfaces
 // để thể hiện liền mạch hơn __thành phần_ của kiểu.
-// Điều này không nên nhầm với `//go:embed`, đây là 
+// Điều này không nên nhầm với `//go:embed`, đây là
 // lệnh Go được giới thiệu trực tiếp trong bản Go 1.16+
 // để nhúng các tệp và thư mục vào tệp nhị phân của ứng dụng.
 

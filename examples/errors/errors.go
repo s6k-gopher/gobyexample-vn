@@ -1,10 +1,10 @@
-// Trong Go, việc thông báo lỗi qua nội dung rõ ràng  
+// Trong Go, việc thông báo lỗi qua nội dung rõ ràng
 // và giá trị riêng biệt. Điều này khác với việc sử dụng
 // các exception trong các ngôn ngữ như Java và Ruby và
 // sử dụng giá trị kết quả/lỗi đơn giản được quá tải đôi khi
 // được dùng trong C. Cách tiếp cận của Go giúp dễ dàng nhận ra
 // các hàm trả về lỗi và xử lý chúng bằng cách sử dụng cùng môt
-// cấu trúc ngôn ngữ được sử dụng cho bất kỳ nhiệm vụ nào khác 
+// cấu trúc ngôn ngữ được sử dụng cho bất kỳ nhiệm vụ nào khác
 // không phải là lỗi.
 
 package main

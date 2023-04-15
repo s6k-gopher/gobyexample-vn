@@ -32,8 +32,8 @@ func main() {
 	}("going")
 
 	// Hai lần gọi hàm của chúng ta đang được thực thi bất đồng bộ
-	// trong các goroutine riêng biệt. Đợi chúng thực thi xong 
-	// (để có một cách tiếp cận đáng tin cậy hơn, ta có thể sử dụng 
+	// trong các goroutine riêng biệt. Đợi chúng thực thi xong
+	// (để có một cách tiếp cận đáng tin cậy hơn, ta có thể sử dụng
 	// một [WaitGroup](waitgroups)).
 	time.Sleep(time.Second)
 	fmt.Println("done")

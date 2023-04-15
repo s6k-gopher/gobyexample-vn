@@ -13,6 +13,6 @@ goroutine : 1
 goroutine : 2
 done
 
-# Tiếp theo, chúng ta sẽ xem xét một phần bổ sung cho goroutine
-# trong các concurrent Go program (chương trình Go  đồng thời):
-# channels (kênh).
+# Tiếp theo, chúng ta sẽ xem xét một phần bổ sung 
+# cho goroutine trong các concurrent Go program 
+#(chương trình Go  đồng thời): channels (kênh).
