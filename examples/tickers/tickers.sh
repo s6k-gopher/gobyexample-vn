@@ -1,4 +1,5 @@
-# Khi chúng ta chạy chương trình này thì ticker sẽ lặp lại 3 lần
+# Khi chúng ta chạy chương trình này 
+# thì ticker sẽ lặp lại 3 lần
 # trước khi chúng ta dừng nó.
 $ go run tickers.go
 Tick at 2012-09-23 11:29:56.487625 -0700 PDT

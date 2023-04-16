@@ -10,5 +10,7 @@ loop
 3
 5
 
-# Chúng ta sẽ thấy các hình thức `for` khác về sau, khi chúng ta 
-# làm tới phần tuyên bố `range`, channels (kênh), và các loại cấu trúc dữ liệu khác
+# Chúng ta sẽ thấy các hình thức `for` 
+# khác về sau, khi chúng ta làm tới phần 
+# tuyên bố `range`, channels (kênh), và 
+# các loại cấu trúc dữ liệu khác
