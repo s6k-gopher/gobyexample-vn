@@ -1,6 +1,7 @@
-// Trong ví dụ sử dụng (range) trước đó chúng ta đã thấy cách
-// dùng `for` và `range` để lặp qua các cấu trúc dữ liệu cơ bản.
-// Trong ví dụ này, chúng ta cũng có thể sử dụng cú pháp tương tự
+// Trong ví dụ sử dụng (range) trước đó chúng ta đã
+// thấy cách dùng `for` và `range` để lặp qua các
+// cấu trúc dữ liệu cơ bản. Trong ví dụ này,
+// chúng ta cũng có thể sử dụng cú pháp tương tự
 // để lặp qua các giá trị được nhận từ một channel.
 
 package main

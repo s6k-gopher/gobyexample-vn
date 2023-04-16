@@ -1,10 +1,10 @@
 // Thao tác gửi và nhận trên channel là `blocking`.
-// (`blocking` trong lập trình là quá trình hoặc thao tác
-// khiến chương trình không thể tiếp tục cho đến khi hoàn thành)
-// Tuy nhiên, chúng ta có thể sử dụng `select` với `default` để
-// thực hiện các thao tác gửi, nhận không `blocking`, và cũng có thể
-// thực hiện các thao tác `select` không `blocking` trên nhiều channel.
-
+// [`blocking` trong lập trình là quá trình/thao tác
+// khiến chương trình không thể tiếp tục cho đến
+// khi hoàn thành] Tuy nhiên, chúng ta có thể sử dụng
+// `select` với `default` để thực hiện các thao tác gửi,
+// nhận không `blocking`, và cũng có thể thực hiện các
+// thao tác `select` không `blocking` trên nhiều channel.
 package main
 
 import "fmt"
@@ -13,10 +13,11 @@ func main() {
 	messages := make(chan string)
 	signals := make(chan bool)
 
-	// Đây là một cách nhận giá trị không `blocking` từ channel.
-	// Nếu một giá trị có sẵn trên `messages` thì `select` sẽ chọn
-	// trường hợp `<-messages` với giá trị đó. Nếu không, nó sẽ chọn
-	// trường hợp `default` ngay lập tức.
+	// Đây là một cách nhận giá trị không `blocking` từ
+	// channel. Nếu một giá trị có sẵn trên `messages`
+	// thì `select` sẽ chọn trường hợp `<-messages` với
+	// giá trị đó. Nếu không, sẽ chọn trường hợp `default`
+	// ngay lập tức.
 	select {
 	case msg := <-messages:
 		fmt.Println("received message", msg)
@@ -36,10 +37,10 @@ func main() {
 		fmt.Println("no message sent")
 	}
 
-	// Chúng ta có thể sữ dụng nhiều `case` kết hợp `default` để thực hiện
-	// `select` gửi/nhận không `blocking` trên nhiều channel.
-	// Ở đây chúng ta thử nhận không `blocking` cả 2 channel
-	// `messages` và `signals`.
+	// Chúng ta có thể sữ dụng nhiều `case` kết hợp `default`
+	// để thực hiện `select` gửi/nhận không `blocking` trên
+	// nhiều channel. Chúng ta thử nhận không `blocking`
+	// cả 2 channel `messages` và `signals`.
 	select {
 	case msg := <-messages:
 		fmt.Println("received message", msg)
