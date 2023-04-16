@@ -11,5 +11,5 @@ sha256 this string
 # `crypto/sha512` và sử dụng `sha512.New()`.
 
 # Lưu ý rằng nếu bạn cần các giá trị băm an toàn 
-# gằng mật mã, bạn nên nghiên cứu kỹ
+# bằng mật mã, bạn nên nghiên cứu kỹ
 # [sức mạnh băm](https://en.wikipedia.org/wiki/Cryptographic_hash_function)!

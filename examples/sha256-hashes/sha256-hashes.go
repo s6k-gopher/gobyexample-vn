@@ -16,16 +16,16 @@ import (
 func main() {
 	s := "sha256 this string"
 
-	// Ở đây, chúng ta bắt đầu với một giá trị băm mới.
+	// Ở đây, chúng ta bắt đầu với một đối tượng băm mới.
 	h := sha256.New()
 
 	// `Write` yêu cầu bytes. Nếu bạn có một chuỗi `s`,
 	// sử dụng `[]byte(s)` để ép nó thành byte.
 	h.Write([]byte(s))
 
-	// Đây là kết quả băm đã hoàn thành dưới dạng byte slice
-	// slice. Tham số của `Sum` có thể được sử dụng để thêm
-	// vào một byte slice hiện có: thường không cần thiết.
+	// Đây là kết quả băm đã hoàn thành dưới dạng byte slice.
+	// Tham số của `Sum` có thể được sử dụng để thêm
+	// vào một byte slice hiện có, thường không cần thiết.
 	bs := h.Sum(nil)
 
 	fmt.Println(s)

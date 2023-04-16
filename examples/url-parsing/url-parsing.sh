@@ -1,5 +1,5 @@
 # Khi chạy chương trình phân tích URL của chúng ta, nó sẽ
-# hiện thỉ tất cả các phần khác nhau mà chúng ta
+# hiện thị tất cả các phần khác nhau mà chúng ta
 # trích xuất được.
 $ go run url-parsing.go 
 postgres

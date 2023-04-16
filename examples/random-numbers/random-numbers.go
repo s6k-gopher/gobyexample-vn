@@ -42,7 +42,7 @@ func main() {
 	fmt.Println()
 
 	// Nếu bạn khởi tạo một nguồn với cùng một số, nó
-	//  sẽ tạo ra cùng một chuỗi số ngẫu nhiên.
+	// sẽ tạo ra cùng một chuỗi số ngẫu nhiên.
 	s2 := rand.NewSource(42)
 	r2 := rand.New(s2)
 	fmt.Print(r2.Intn(100), ",")

@@ -13,7 +13,7 @@ import (
 
 func main() {
 
-	// Đây là chuỗi chúng ta sẽ mã hóa / giải mã.
+	// Đây là chuỗi chúng ta sẽ mã hóa/giải mã.
 	data := "abc123!?$*&()'-=@~"
 
 	// Go hỗ trợ của base64 chuẩn và URL-compatible
