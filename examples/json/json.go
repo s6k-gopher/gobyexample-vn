@@ -1,6 +1,6 @@
-// Go có các gói hỗ trợ sẵn cho việc 
+// Go có các gói hỗ trợ sẵn cho việc
 // mã hóa và giải mã JSON, bao gồm cả việc
-// mã hóa và giải mã từ kiểu dữ liệu có sẵn 
+// mã hóa và giải mã từ kiểu dữ liệu có sẵn
 // và kiểu dữ liệu tùy chỉnh.
 package main
 
@@ -17,8 +17,8 @@ type response1 struct {
 	Fruits []string
 }
 
-// Chỉ có các trường đã được export mới được 
-// mã hóa/giải mã trong JSON. Các trường phải 
+// Chỉ có các trường đã được export mới được
+// mã hóa/giải mã trong JSON. Các trường phải
 // bắt đầu bằng chữ hoa để được export.
 type response2 struct {
 	Page   int      `json:"page"`
@@ -31,8 +31,8 @@ func main() {
 	// JSON strings. Here are some examples for atomic
 	// values.
 	// Đầu tiên ta sẽ xem cách mã hóa các kiểu dữ liệu cơ bản
-	// thành chuỗi JSON. Đây là một số ví dụ về các giá trị
-	// nguyên thủy.
+	// thành chuỗi JSON. Đây là một số ví dụ về mã hoá
+	// các giá trị thuộc kiểu nguyên thuỷ.
 	bolB, _ := json.Marshal(true)
 	fmt.Println(string(bolB))
 
@@ -45,8 +45,9 @@ func main() {
 	strB, _ := json.Marshal("gopher")
 	fmt.Println(string(strB))
 
-	// And here are some for slices and maps, which encode
-	// to JSON arrays and objects as you'd expect.
+	// Và dưới đây là một số ví dụ về các mảng và
+	// các map, chúng sẽ được mã hoá thành các mảng JSON và
+	// các object như mong đợi.
 	slcD := []string{"apple", "peach", "pear"}
 	slcB, _ := json.Marshal(slcD)
 	fmt.Println(string(slcB))
@@ -55,73 +56,75 @@ func main() {
 	mapB, _ := json.Marshal(mapD)
 	fmt.Println(string(mapB))
 
-	// The JSON package can automatically encode your
-	// custom data types. It will only include exported
-	// fields in the encoded output and will by default
-	// use those names as the JSON keys.
+	// Package JSON có thể tự động mã hoá các
+	// kiểu dữ liệu tuỳ chỉnh của bạn. Nó sẽ chỉ bao gồm
+	// các trường được export trong đầu ra đã mã hoá và sẽ
+	// mặc định sử dụng tên các trường đó cho các khóa (key)
+	// trong JSON.
 	res1D := &response1{
 		Page:   1,
 		Fruits: []string{"apple", "peach", "pear"}}
 	res1B, _ := json.Marshal(res1D)
 	fmt.Println(string(res1B))
 
-	// You can use tags on struct field declarations
-	// to customize the encoded JSON key names. Check the
-	// definition of `response2` above to see an example
-	// of such tags.
+	// Bạn có thể sử dụng các tag trên các trường của struct
+	// lúc khai báo để tùy chỉnh các tên khóa (key) trong
+	// chuỗi JSON đã được mã hoá. Hãy xem khai báo của `response2`
+	// ở trên để xem ví dụ về các tag như vậy.
 	res2D := &response2{
 		Page:   1,
 		Fruits: []string{"apple", "peach", "pear"}}
 	res2B, _ := json.Marshal(res2D)
 	fmt.Println(string(res2B))
 
-	// Now let's look at decoding JSON data into Go
-	// values. Here's an example for a generic data
-	// structure.
+	// Bây giờ hãy xem cách giải mã dữ liệu JSON thành các
+	// giá trị trong Go. Đây là một ví dụ về
+	// một cấu trúc dữ liệu kiểu generic.
 	byt := []byte(`{"num":6.13,"strs":["a","b"]}`)
 
-	// We need to provide a variable where the JSON
-	// package can put the decoded data. This
-	// `map[string]interface{}` will hold a map of strings
-	// to arbitrary data types.
+	// Chúng ta cần cung cấp một biến mà package JSON có thể
+	// truyền vào dữ liệu đã được giải mã. Biến `map[string]interface{}`
+	// ở đây sẽ chứa một map các chuỗi tới các kiểu dữ liệu
+	// bất kỳ.
 	var dat map[string]interface{}
 
-	// Here's the actual decoding, and a check for
-	// associated errors.
+	// Dưới đây là đoạn giải mã, và kiểm tra các lỗi
+	// kèm theo.
 	if err := json.Unmarshal(byt, &dat); err != nil {
 		panic(err)
 	}
 	fmt.Println(dat)
 
-	// In order to use the values in the decoded map,
-	// we'll need to convert them to their appropriate type.
-	// For example here we convert the value in `num` to
-	// the expected `float64` type.
+	// Để dùng các giá trị trong một map đã được giải mã,
+	// ta cần phải chuyển chúng về kiểu dữ liệu phù hợp.
+	// Ở ví dụ dưới đây, ta chuyển giá trị của `num` về
+	// kiểu `float64` mong muốn.
 	num := dat["num"].(float64)
 	fmt.Println(num)
 
-	// Accessing nested data requires a series of
-	// conversions.
+	// Để truy cập vào dữ liệu bị lồng nhau cần
+	// thực hiện một chuỗi các chuyển đổi.
 	strs := dat["strs"].([]interface{})
 	str1 := strs[0].(string)
 	fmt.Println(str1)
 
-	// We can also decode JSON into custom data types.
-	// This has the advantages of adding additional
-	// type-safety to our programs and eliminating the
-	// need for type assertions when accessing the decoded
-	// data.
+	// Ta cũng có thể giải mã JSON thành các kiểu dữ liệu
+	// tuỷ chỉnh. Điều này sẽ giúp ta có thêm một lớp
+	// kiểm tra kiểu dữ liệu cho chương trình của mình và không cần
+	// phải sử dụng các câu lệnh kiểm tra kiểu dữ liệu khi truy cập
+	// vào dữ liệu đã được giải mã.
 	str := `{"page": 1, "fruits": ["apple", "peach"]}`
 	res := response2{}
 	json.Unmarshal([]byte(str), &res)
 	fmt.Println(res)
 	fmt.Println(res.Fruits[0])
 
-	// In the examples above we always used bytes and
-	// strings as intermediates between the data and
-	// JSON representation on standard out. We can also
-	// stream JSON encodings directly to `os.Writer`s like
-	// `os.Stdout` or even HTTP response bodies.
+	// Trong các ví dụ trên, các bytes và các chuỗi thường
+	// được dùng làm trung gian giữa dữ liệu và biểu diễn JSON
+	// trên đầu ra chuẩn. Chúng ta cũng có thể stream các
+	// biểu diễn JSON trực tiếp đến các `os.Writer` như
+	// `os.Stdout` hoặc thậm chí phần body của các
+	// HTTP response.
 	enc := json.NewEncoder(os.Stdout)
 	d := map[string]int{"apple": 5, "lettuce": 7}
 	enc.Encode(d)
