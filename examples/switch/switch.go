@@ -1,4 +1,4 @@
-// Câu lệnh _Switch thể hiện điều kiện qua nhiều nhánh.
+// Câu lệnh _Switch_ thể hiện điều kiện qua nhiều nhánh.
 package main
 
 import (

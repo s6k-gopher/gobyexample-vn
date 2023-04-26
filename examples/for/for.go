@@ -14,13 +14,13 @@ func main() {
 		i = i + 1
 	}
 
-	// Một vòng lặp `for` cổ điển (initial/condition/after)
+	// Một vòng lặp `for` cổ điển (initial/condition/after).
 	for j := 7; j <= 9; j++ {
 		fmt.Println(j)
 	}
 
 	// Vòng lặp `for` khi không có điều kiện sẽ lặp đi lặp lại
-	// cho tới khi gặp `break` hoặc `return` sẽ thoát khỏi vòng lặp
+	// cho tới khi gặp `break` hoặc `return` sẽ thoát khỏi vòng lặp.
 	for {
 		fmt.Println("loop")
 		break

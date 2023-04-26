@@ -1,4 +1,4 @@
-// Phân nhánh trường hợp sử dụng `if` và `else` trong Go rất đơn giản
+// Phân nhánh trường hợp sử dụng `if` và `else` trong Go rất đơn giản.
 package main
 
 import "fmt"
