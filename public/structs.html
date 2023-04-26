@@ -23,6 +23,224 @@
     <div class="example" id="structs">
       <h2><a href="./">Go by Example</a>: Structs</h2>
       
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p><em>Struct</em> của Go là tập hợp các trường dữ liệu được khai báo kiểu.
+Chúng được sử dụng để nhóm các dữ liệu lại với nhau
+để tạo thành các bản ghi.</p>
+
+          </td>
+          <td class="code leading">
+            <a href="https://go.dev/play/p/FKBAjv9w7wq"><img title="Run code" src="play.png" class="run" /></a><img title="Copy code" src="clipboard.png" class="copy" />
+          <pre class="chroma">
+<span class="kn">package</span> <span class="nx">main</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Kiểu struct <code>person</code> này có các trường <code>name</code> và <code>age</code>.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="kd">type</span> <span class="nx">person</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">name</span> <span class="kt">string</span>
+    <span class="nx">age</span>  <span class="kt">int</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p><code>newPerson</code> tạo một struct <code>person</code> mới với tên được truyền vào.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="kd">func</span> <span class="nf">newPerson</span><span class="p">(</span><span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">person</span> <span class="p">{</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Bạn có thể trả về một cách an toàn một con trỏ của biến cục bộ
+vì biến cục bộ sẽ tồn tại trong phạm vi của hàm.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">p</span> <span class="o">:=</span> <span class="nx">person</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span> <span class="nx">name</span><span class="p">}</span>
+    <span class="nx">p</span><span class="p">.</span><span class="nx">age</span> <span class="p">=</span> <span class="mi">42</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">p</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Cú pháp này tạo một struct mới.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">{</span><span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="mi">20</span><span class="p">})</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Bạn có thể đặt tên cho các trường khi khởi tạo một struct.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span> <span class="s">&#34;Alice&#34;</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span> <span class="mi">30</span><span class="p">})</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Các trường bị bỏ qua sẽ được gán giá trị mặc định.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span> <span class="s">&#34;Fred&#34;</span><span class="p">})</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Kí tự <code>&amp;</code> trước tên struct sẽ trả về một con trỏ đến struct đó.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">person</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span> <span class="s">&#34;Ann&#34;</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span> <span class="mi">40</span><span class="p">})</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Một cách viết phổ biến là đóng gói việc tạo một struct mới trong các hàm khởi tạo.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nf">newPerson</span><span class="p">(</span><span class="s">&#34;Jon&#34;</span><span class="p">))</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Truy cập vào các trường của struct bằng dấu chấm.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">s</span> <span class="o">:=</span> <span class="nx">person</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span> <span class="s">&#34;Sean&#34;</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Bạn có thể sử dụng dấu chấm với con trỏ struct - các
+con trỏ sẽ được tự động giải tham chiếu.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">sp</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">s</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">sp</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Các struct có thể thay đổi được.</p>
+
+          </td>
+          <td class="code">
+            
+          <pre class="chroma">
+    <span class="nx">sp</span><span class="p">.</span><span class="nx">age</span> <span class="p">=</span> <span class="mi">51</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">sp</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code">
+            
+          <pre class="chroma"><span class="gp">$</span> go run structs.go
+<span class="go">{Bob 20}
+</span><span class="go">{Alice 30}
+</span><span class="go">{Fred 0}
+</span><span class="go">&amp;{Ann 40}
+</span><span class="go">&amp;{Jon 42}
+</span><span class="go">Sean
+</span><span class="go">50
+</span><span class="go">51</span></pre>
+          </td>
+        </tr>
+        
+      </table>
+      
       
       <p class="next">
         Ví dụ tiếp theo: <a href="methods">Methods</a>.
@@ -36,7 +254,7 @@
     </div>
     <script>
       var codeLines = [];
-      
+      codeLines.push('package main\u000A');codeLines.push('import \"fmt\"\u000A');codeLines.push('type person struct {\u000A    name string\u000A    age  int\u000A}\u000A');codeLines.push('func newPerson(name string) *person {\u000A');codeLines.push('    p :\u003D person{name: name}\u000A    p.age \u003D 42\u000A    return \u0026p\u000A}\u000A');codeLines.push('func main() {\u000A');codeLines.push('    fmt.Println(person{\"Bob\", 20})\u000A');codeLines.push('    fmt.Println(person{name: \"Alice\", age: 30})\u000A');codeLines.push('    fmt.Println(person{name: \"Fred\"})\u000A');codeLines.push('    fmt.Println(\u0026person{name: \"Ann\", age: 40})\u000A');codeLines.push('    fmt.Println(newPerson(\"Jon\"))\u000A');codeLines.push('    s :\u003D person{name: \"Sean\", age: 50}\u000A    fmt.Println(s.name)\u000A');codeLines.push('    sp :\u003D \u0026s\u000A    fmt.Println(sp.age)\u000A');codeLines.push('    sp.age \u003D 51\u000A    fmt.Println(sp.age)\u000A}\u000A');codeLines.push('');
     </script>
     <script src="site.js" async></script>
   </body>
