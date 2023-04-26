@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Go by Example: String Functions</title>
+    <link rel=stylesheet href="site.css">
+  </head>
+  <script>
+      onkeydown = (e) => {
+          
+          if (e.key == "ArrowLeft") {
+              window.location.href = 'recover';
+          }
+          
+          
+          if (e.key == "ArrowRight") {
+              window.location.href = 'string-formatting';
+          }
+          
+      }
+  </script>
+  <body>
+    <div class="example" id="string-functions">
+      <h2><a href="./">Go by Example</a>: String Functions</h2>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p>Thư viện tiêu chuẩn <code>strings</code> cung cấp nhiều hàm hữu ích
+liên quan đến xử lý chuỗi. Dưới đây là một số ví dụ
+để bạn có cái nhìn tổng quan về thư viện này.</p>
+
+          </td>
+          <td class="code empty leading">
+            
+          
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            <a href="https://go.dev/play/p/ZIF7aTZWjOO"><img title="Run code" src="play.png" class="run" /></a><img title="Copy code" src="clipboard.png" class="copy" />
+          <pre class="chroma"><span class="kn">package</span> <span class="nx">main</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="nx">s</span> <span class="s">&#34;strings&#34;</span>
+<span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Chúng ta sẽ dùng một cái tên khác ngắn gọn hơn để alias
+cho hàm <code>fmt.Println</code> vì chúng ta sẽ sử dụng nó nhiều lần dưới đây.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="kd">var</span> <span class="nx">p</span> <span class="p">=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Dưới đây là một ví dụ về các hàm có sẵn trong thư viện
+<code>strings</code>. Vì đây là các hàm của thư viện, chứ không phải
+là các phương thức của đối tượng string, nên chúng ta cần
+truyền vào chuỗi cần truy vấn vào vị trí đối số đầu tiên của hàm.
+Bạn có thể tìm thêm các hàm trong thư viện
+<a href="https://pkg.go.dev/strings"><code>strings</code></a> từ tài liệu của nó.</p>
+
+          </td>
+          <td class="code">
+            
+          <pre class="chroma">
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;Contains:  &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="s">&#34;es&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;Count:     &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Count</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="s">&#34;t&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;HasPrefix: &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">HasPrefix</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="s">&#34;te&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;HasSuffix: &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">HasSuffix</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="s">&#34;st&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;Index:     &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Index</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">,</span> <span class="s">&#34;e&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;Join:      &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Join</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;b&#34;</span><span class="p">},</span> <span class="s">&#34;-&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;Repeat:    &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Repeat</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;Replace:   &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;o&#34;</span><span class="p">,</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;Replace:   &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;o&#34;</span><span class="p">,</span> <span class="s">&#34;0&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;Split:     &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">Split</span><span class="p">(</span><span class="s">&#34;a-b-c-d-e&#34;</span><span class="p">,</span> <span class="s">&#34;-&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;ToLower:   &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">ToLower</span><span class="p">(</span><span class="s">&#34;TEST&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="s">&#34;ToUpper:   &#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">.</span><span class="nf">ToUpper</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">))</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code">
+            
+          <pre class="chroma"><span class="gp">$</span> go run string-functions.go
+<span class="go">Contains:   true
+</span><span class="go">Count:      2
+</span><span class="go">HasPrefix:  true
+</span><span class="go">HasSuffix:  true
+</span><span class="go">Index:      1
+</span><span class="go">Join:       a-b
+</span><span class="go">Repeat:     aaaaa
+</span><span class="go">Replace:    f00
+</span><span class="go">Replace:    f0o
+</span><span class="go">Split:      [a b c d e]
+</span><span class="go">ToLower:    test
+</span><span class="go">ToUpper:    TEST</span></pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      
+      <p class="next">
+        Ví dụ tiếp theo: <a href="string-formatting">String Formatting</a>.
+      </p>
+      
+
+    <p class="footer">
+      Tác giả <a href="https://markmcgranaghan.com">Mark McGranaghan</a> và <a href="https://eli.thegreenplace.net">Eli Bendersky</a> | <a href="https://github.com/mmcgrana/gobyexample">source</a> | <a href="https://github.com/mmcgrana/gobyexample#license">license</a>
+    </p>
+
+    </div>
+    <script>
+      var codeLines = [];
+      codeLines.push('');codeLines.push('package main\u000A');codeLines.push('import (\u000A    \"fmt\"\u000A    s \"strings\"\u000A)\u000A');codeLines.push('var p \u003D fmt.Println\u000A');codeLines.push('func main() {\u000A');codeLines.push('    p(\"Contains:  \", s.Contains(\"test\", \"es\"))\u000A    p(\"Count:     \", s.Count(\"test\", \"t\"))\u000A    p(\"HasPrefix: \", s.HasPrefix(\"test\", \"te\"))\u000A    p(\"HasSuffix: \", s.HasSuffix(\"test\", \"st\"))\u000A    p(\"Index:     \", s.Index(\"test\", \"e\"))\u000A    p(\"Join:      \", s.Join([]string{\"a\", \"b\"}, \"-\"))\u000A    p(\"Repeat:    \", s.Repeat(\"a\", 5))\u000A    p(\"Replace:   \", s.Replace(\"foo\", \"o\", \"0\", -1))\u000A    p(\"Replace:   \", s.Replace(\"foo\", \"o\", \"0\", 1))\u000A    p(\"Split:     \", s.Split(\"a-b-c-d-e\", \"-\"))\u000A    p(\"ToLower:   \", s.ToLower(\"TEST\"))\u000A    p(\"ToUpper:   \", s.ToUpper(\"test\"))\u000A}\u000A');codeLines.push('');
+    </script>
+    <script src="site.js" async></script>
+  </body>
+</html>

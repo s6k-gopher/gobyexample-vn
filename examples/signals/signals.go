@@ -27,13 +27,13 @@ func main() {
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
 	// Ta có thể nhận các thông báo từ `sigs` ở bên trong
-	// hàm `main`, nhưng hãy xem cách khiến cho điều này 
+	// hàm `main`, nhưng hãy xem cách khiến cho điều này
 	// cũng có thể trong một goroutine riêng biệt, để minh
 	// hoạ cho một trường hợp thực tế hơn về shutdown.
 	done := make(chan bool, 1)
 
 	go func() {
-		// Goroutine này thực hiện một blocking receive (chặn việc 
+		// Goroutine này thực hiện một blocking receive (chặn việc
 		// nhận thêm dữ liệu đến channel) trong khi đợi các tín hiệu.
 		// Khi nó nhận được một tín hiệu, nó sẽ in ra và sau đó
 		// thông báo cho chương trình rằng nó có thể kết thúc.

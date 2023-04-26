@@ -1,6 +1,6 @@
 // _Closing_ Đóng một channel nghĩa là sẽ không có giá trị
-// nào được gửi vào channel nữa. Điều này có thể dùng để 
-// xác định việc hoàn thành thao tác nhận giá trị 
+// nào được gửi vào channel nữa. Điều này có thể dùng để
+// xác định việc hoàn thành thao tác nhận giá trị
 // từ channel.
 
 package main
@@ -10,7 +10,7 @@ import "fmt"
 // Trong ví dụ này, chúng ta sẽ sử dụng một channel `jobs`
 // để truyền `job` cần thực hiện từ `main()` đến một
 // `worker`. Khi không còn `job` nào cho `worker` thực
-// hiện thì chúng ta sẽ dùng `close` để đóng 
+// hiện thì chúng ta sẽ dùng `close` để đóng
 // channel `jobs`.
 func main() {
 	jobs := make(chan int, 5)

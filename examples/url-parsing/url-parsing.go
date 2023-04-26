@@ -12,7 +12,7 @@ import (
 func main() {
 
 	// Chúng ta sẽ phân tích cú pháp URL ví dụ này, bao gồm một
-	// scheme, thông tin xác thực, host (máy chủ), port (cổng), 
+	// scheme, thông tin xác thực, host (máy chủ), port (cổng),
 	// path (đường dẫn), tham số truy vấn và phần đánh dấu truy vấn.
 	s := "postgres://user:pass@host.com:5432/path?k=v#f"
 

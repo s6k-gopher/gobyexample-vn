@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Go by Example: Writing Files</title>
+    <link rel=stylesheet href="site.css">
+  </head>
+  <script>
+      onkeydown = (e) => {
+          
+          if (e.key == "ArrowLeft") {
+              window.location.href = 'reading-files';
+          }
+          
+          
+          if (e.key == "ArrowRight") {
+              window.location.href = 'line-filters';
+          }
+          
+      }
+  </script>
+  <body>
+    <div class="example" id="writing-files">
+      <h2><a href="./">Go by Example</a>: Writing Files</h2>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p>Ghi tập tin trong Go làm theo các mô hình tương tự
+như những gì chúng ta thấy trước đó khi đọc tập tin</p>
+
+          </td>
+          <td class="code empty leading">
+            
+          
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            <a href="https://go.dev/play/p/AqMtNflQ-XK"><img title="Run code" src="play.png" class="run" /></a><img title="Copy code" src="clipboard.png" class="copy" />
+          <pre class="chroma"><span class="kn">package</span> <span class="nx">main</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;bufio&#34;</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;os&#34;</span>
+<span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kd">func</span> <span class="nf">check</span><span class="p">(</span><span class="nx">e</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">e</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Để bắt đầu, đây là cách dump một chuỗi (hoặc
+chỉ các byte) vào tập tin.
+bytes) into a file.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">d1</span> <span class="o">:=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&#34;hello\ngo\n&#34;</span><span class="p">)</span>
+    <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">WriteFile</span><span class="p">(</span><span class="s">&#34;/tmp/dat1&#34;</span><span class="p">,</span> <span class="nx">d1</span><span class="p">,</span> <span class="mo">0644</span><span class="p">)</span>
+    <span class="nf">check</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Để ghi các phần nhỏ hơn, hãy mở một tệp tin để ghi.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">f</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;/tmp/dat2&#34;</span><span class="p">)</span>
+    <span class="nf">check</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Luôn tốt khi sử dụng defer để <code>đóng</code> tập tin ngay lập tức
+sau khi mở tập tin.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="k">defer</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Bạn có thể <code>ghi</code> các slice byte như bạn mong đợi.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">d2</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">{</span><span class="mi">115</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">10</span><span class="p">}</span>
+    <span class="nx">n2</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">f</span><span class="p">.</span><span class="nf">Write</span><span class="p">(</span><span class="nx">d2</span><span class="p">)</span>
+    <span class="nf">check</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;wrote %d bytes\n&#34;</span><span class="p">,</span> <span class="nx">n2</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Hàm <code>WriteString</code> có sẵn.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">n3</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">f</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="s">&#34;writes\n&#34;</span><span class="p">)</span>
+    <span class="nf">check</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;wrote %d bytes\n&#34;</span><span class="p">,</span> <span class="nx">n3</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Sử dụng <code>Sync</code> để flush (đẩy) các bản ghi vào bộ lưu trữ ổn định.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">f</span><span class="p">.</span><span class="nf">Sync</span><span class="p">()</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p><code>bufio</code> cung cấp các writer được đệm bên cạnh
+bên cạnh các reader được đệm mà chúng ta đã thấy
+trước đó.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">w</span> <span class="o">:=</span> <span class="nx">bufio</span><span class="p">.</span><span class="nf">NewWriter</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+    <span class="nx">n4</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">w</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="s">&#34;buffered\n&#34;</span><span class="p">)</span>
+    <span class="nf">check</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;wrote %d bytes\n&#34;</span><span class="p">,</span> <span class="nx">n4</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Sử dụng <code>Flush</code> đảm bảo tất cả các hoạt động được đệm
+ đã được áp dụng cho writer cơ sở.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">w</span><span class="p">.</span><span class="nf">Flush</span><span class="p">()</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code">
+            
+          <pre class="chroma"><span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p>Hãy thử chạy code (mã) ghi tệp tin.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="gp">$</span> go run writing-files.go 
+<span class="go">wrote 5 bytes
+</span><span class="go">wrote 7 bytes
+</span><span class="go">wrote 9 bytes</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Sau đó kiểm tra nội dung của các tập tin đã viết.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="gp">$</span> cat /tmp/dat1
+<span class="go">hello
+</span><span class="go">go
+</span><span class="go"></span><span class="gp">$</span> cat /tmp/dat2
+<span class="go">some
+</span><span class="go">writes
+</span><span class="go">buffered</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Tiếp theo, chúng ta sẽ xem xét áp dụng một số
+ý tưởng I/O tệp mà chúng ta vừa thấy cho các
+luồng <code>sdtin</code> và <code>stdout</code>.</p>
+
+          </td>
+          <td class="code empty">
+            
+          
+          </td>
+        </tr>
+        
+      </table>
+      
+      
+      <p class="next">
+        Ví dụ tiếp theo: <a href="line-filters">Line Filters</a>.
+      </p>
+      
+
+    <p class="footer">
+      Tác giả <a href="https://markmcgranaghan.com">Mark McGranaghan</a> và <a href="https://eli.thegreenplace.net">Eli Bendersky</a> | <a href="https://github.com/mmcgrana/gobyexample">source</a> | <a href="https://github.com/mmcgrana/gobyexample#license">license</a>
+    </p>
+
+    </div>
+    <script>
+      var codeLines = [];
+      codeLines.push('');codeLines.push('package main\u000A');codeLines.push('import (\u000A    \"bufio\"\u000A    \"fmt\"\u000A    \"os\"\u000A)\u000A');codeLines.push('func check(e error) {\u000A    if e !\u003D nil {\u000A        panic(e)\u000A    }\u000A}\u000A');codeLines.push('func main() {\u000A');codeLines.push('    d1 :\u003D []byte(\"hello\\ngo\\n\")\u000A    err :\u003D os.WriteFile(\"/tmp/dat1\", d1, 0644)\u000A    check(err)\u000A');codeLines.push('    f, err :\u003D os.Create(\"/tmp/dat2\")\u000A    check(err)\u000A');codeLines.push('    defer f.Close()\u000A');codeLines.push('    d2 :\u003D []byte{115, 111, 109, 101, 10}\u000A    n2, err :\u003D f.Write(d2)\u000A    check(err)\u000A    fmt.Printf(\"wrote %d bytes\\n\", n2)\u000A');codeLines.push('    n3, err :\u003D f.WriteString(\"writes\\n\")\u000A    check(err)\u000A    fmt.Printf(\"wrote %d bytes\\n\", n3)\u000A');codeLines.push('    f.Sync()\u000A');codeLines.push('    w :\u003D bufio.NewWriter(f)\u000A    n4, err :\u003D w.WriteString(\"buffered\\n\")\u000A    check(err)\u000A    fmt.Printf(\"wrote %d bytes\\n\", n4)\u000A');codeLines.push('    w.Flush()\u000A');codeLines.push('}\u000A');codeLines.push('');codeLines.push('');codeLines.push('');
+    </script>
+    <script src="site.js" async></script>
+  </body>
+</html>

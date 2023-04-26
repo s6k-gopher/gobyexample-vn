@@ -14,7 +14,7 @@ func main() {
 	m["k1"] = 7
 	m["k2"] = 13
 
-	// In ra một map với `fmt.Println` sẽ thể hiện tất cả 
+	// In ra một map với `fmt.Println` sẽ thể hiện tất cả
 	// các cặp key/value.
 	fmt.Println("map:", m)
 
@@ -32,7 +32,7 @@ func main() {
 	// khi sử dụng cho map.
 	fmt.Println("len:", len(m))
 
-	// Hàm tích hợp `delete` xóa cặp key/value khỏi 
+	// Hàm tích hợp `delete` xóa cặp key/value khỏi
 	// map.
 	delete(m, "k2")
 	fmt.Println("map:", m)

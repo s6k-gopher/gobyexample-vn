@@ -40,8 +40,8 @@ func main() {
 	}
 
 	// Cho dù chờ đủ thời gian 2 giây
-	// `time.Sleep(2 * time.Second)` 
-	// Kết quả vẫn là "Timer 2 stopped" 
+	// `time.Sleep(2 * time.Second)`
+	// Kết quả vẫn là "Timer 2 stopped"
 	// vì timer đã được hủy bởi `timer2.Stop()`
 	// trước khi đến giờ thực thi.
 	time.Sleep(2 * time.Second)

@@ -32,7 +32,7 @@ func main() {
 		// Đọc [FAQ](https://golang.org/doc/faq#closures_and_goroutines)
 		i := i
 
-		// Bọc hàm gọi worker trong một closure để đảm bảo rằng 
+		// Bọc hàm gọi worker trong một closure để đảm bảo rằng
 		// WaitGroup sẽ được thông báo khi một worker kết thúc. Bằng cách này
 		// worker không cần phải quan tâm đến các kiểu nguyên thuỷ của concurrency
 		// (concurrency primitives) trong quá trình thực thi.
@@ -46,7 +46,7 @@ func main() {
 	// tất cả các worker đã thông báo rằng chúng đã chạy xong.
 	wg.Wait()
 
-	// Chú ý rằng: phương pháp này không có cách nào 
+	// Chú ý rằng: phương pháp này không có cách nào
 	// để truyền lỗi trực tiếp từ các worker. Để sử dụng
 	// trong các trường hợp nâng cao hơn, hãy xem xét sử dụng
 	// [errgroup package](https://pkg.go.dev/golang.org/x/sync/errgroup).

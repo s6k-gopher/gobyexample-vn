@@ -27,25 +27,25 @@ func main() {
 	// Dòng dưới đây sẽ tìm kiếm chuỗi khớp với pattern ở trên
 	fmt.Println(r.FindString("peach punch"))
 
-	// Dòng dưới đây cũng tìm kiếm chuỗi đầu tiên khớp với pattern ở trên 
+	// Dòng dưới đây cũng tìm kiếm chuỗi đầu tiên khớp với pattern ở trên
 	// nhưng trả về chỉ số bắt đầu và kết thúc của chuỗi khớp thay vì
 	// trả về một chuỗi khớp.
 	fmt.Println("idx:", r.FindStringIndex("peach punch"))
 
 	// Biến thể `Submatch` cũng trả về thông tin về cả các
-	// kết quả phù hợp với toàn bộ biểu thức chính quy (whole-pattern matches, matches) và 
-	// các kết quả phù hợp với các mẫu phụ (submatches) trong các kết quả đó. Ví dụ,  
+	// kết quả phù hợp với toàn bộ biểu thức chính quy (whole-pattern matches, matches) và
+	// các kết quả phù hợp với các mẫu phụ (submatches) trong các kết quả đó. Ví dụ,
 	// đoạn mã này sẽ trả về thông tin cho cả `p([a-z]+)ch` và `([a-z]+)`.
 
 	fmt.Println(r.FindStringSubmatch("peach punch"))
 
-	// Tương tự như trên, đoạn mã này sẽ trả về thông tin 
+	// Tương tự như trên, đoạn mã này sẽ trả về thông tin
 	// về chỉ số của các matches và các submatches.
 	fmt.Println(r.FindStringSubmatchIndex("peach punch"))
 
-	// Các biến thể `All` của các hàm trên sẽ áp dụng cho tất cả 
-	// các matches từ giá trị truyền vào, chứ không chỉ áp dụng riêng 
-	// cho kết quả match đầu tiên. Ví dụ, để tìm tất cả các matches 
+	// Các biến thể `All` của các hàm trên sẽ áp dụng cho tất cả
+	// các matches từ giá trị truyền vào, chứ không chỉ áp dụng riêng
+	// cho kết quả match đầu tiên. Ví dụ, để tìm tất cả các matches
 	// cho một biểu thức chính quy.
 	fmt.Println(r.FindAllString("peach punch pinch", -1))
 
@@ -55,13 +55,13 @@ func main() {
 		"peach punch pinch", -1))
 
 	// Truyền một số nguyên không âm ở đối số thứ hai
-	// vào các hàm này sẽ giới hạn số lượng 
+	// vào các hàm này sẽ giới hạn số lượng
 	// kết quả matches trả về.
 	fmt.Println(r.FindAllString("peach punch pinch", 2))
 
 	// Các ví dụ ở trên của chúng ta sử dụng các chuỗi kí tự
 	// dưới dạng đối số và sử dụng tên hàm có dạng như `MatchString`.
-	// Ta cũng có thể sử dụng các đối số kiểu `[]byte` và bỏ đi 
+	// Ta cũng có thể sử dụng các đối số kiểu `[]byte` và bỏ đi
 	// phần `String` trong tên hàm.
 	fmt.Println(r.Match([]byte("peach")))
 

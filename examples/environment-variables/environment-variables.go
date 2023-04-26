@@ -23,7 +23,7 @@ func main() {
 
 	// Sử dụng `os.Environ` để liệt kê tất cả cặp khoá/giá trị
 	// trong môi trường. Điều này trả về một slice của chuỗi
-	// dưới dạng `KEY=value`. Bạn có thể sử dụng `strings.SplitN` 
+	// dưới dạng `KEY=value`. Bạn có thể sử dụng `strings.SplitN`
 	// để lấy khoá và giá trị. Ở đây, chúng ta in tất cả các khoá.
 	fmt.Println()
 	for _, e := range os.Environ() {

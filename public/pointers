@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Go by Example: Pointers</title>
+    <link rel=stylesheet href="site.css">
+  </head>
+  <script>
+      onkeydown = (e) => {
+          
+          if (e.key == "ArrowLeft") {
+              window.location.href = 'recursion';
+          }
+          
+          
+          if (e.key == "ArrowRight") {
+              window.location.href = 'strings-and-runes';
+          }
+          
+      }
+  </script>
+  <body>
+    <div class="example" id="pointers">
+      <h2><a href="./">Go by Example</a>: Pointers</h2>
+      
+      
+      <p class="next">
+        Ví dụ tiếp theo: <a href="strings-and-runes">Strings and Runes</a>.
+      </p>
+      
+
+    <p class="footer">
+      Tác giả <a href="https://markmcgranaghan.com">Mark McGranaghan</a> và <a href="https://eli.thegreenplace.net">Eli Bendersky</a> | <a href="https://github.com/mmcgrana/gobyexample">source</a> | <a href="https://github.com/mmcgrana/gobyexample#license">license</a>
+    </p>
+
+    </div>
+    <script>
+      var codeLines = [];
+      
+    </script>
+    <script src="site.js" async></script>
+  </body>
+</html>

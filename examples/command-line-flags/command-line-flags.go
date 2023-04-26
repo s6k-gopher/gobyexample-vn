@@ -1,6 +1,6 @@
 // [_Command-line flags_ (cờ dòng lệnh)](https://en.wikipedia.org/wiki/Command-line_interface#Command-line_option)
 // là cách thông thường để chỉ định các tuỳ chọn cho các
-// chương chình dòng lệnh. Ví dụ, trong lệnh `wc -l`, `-l` 
+// chương chình dòng lệnh. Ví dụ, trong lệnh `wc -l`, `-l`
 // là một cờ dòng lệnh.
 
 package main
@@ -30,7 +30,7 @@ func main() {
 
 	// Cũng có thể khai báo một tùy chọn sử dụng một biến
 	// đã được khai báo ở một nơi khác trong chương trình.
-	// Lưu ý rằng chúng ta cần truyền vào một con trỏ tới 
+	// Lưu ý rằng chúng ta cần truyền vào một con trỏ tới
 	// hàm khai báo cờ.
 	var svar string
 	flag.StringVar(&svar, "svar", "bar", "a string var")

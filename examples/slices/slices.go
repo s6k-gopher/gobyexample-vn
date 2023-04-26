@@ -6,7 +6,7 @@ package main
 import "fmt"
 
 func main() {
-	
+
 	// Không giống với array, slices được nhập theo các phần tử
 	// mà chúng chứa (không phải số lượng phần tử).
 	// Để tạo một slice trống với độ dài khác 0, sử dụng hàm tích hợp
@@ -26,7 +26,7 @@ func main() {
 	fmt.Println("len:", len(s))
 
 	// Ngoài các thao tác cơ bản, slices hỗ trợ thêm
-	// vài cái giúp cho phong phú hơn array. Một là hàm 
+	// vài cái giúp cho phong phú hơn array. Một là hàm
 	// tích hợp `append`, giúp trả về slice chứa một hoặc nhiều giá trị hơn.
 	// Lưu ý rằng chúng ta cần đồng ý giá trị trả về từ `append` bởi vì
 	// chúng ta có thể nhận một giá trị slice mới.
@@ -34,7 +34,7 @@ func main() {
 	s = append(s, "e", "f")
 	fmt.Println("apd:", s)
 
-	// Chúng ta cũng có thể sử dụng `copy` với slices. Ở đây 
+	// Chúng ta cũng có thể sử dụng `copy` với slices. Ở đây
 	// chúng ta tạo một slice `c` với độ dài cùng với `s` và copy
 	// từ `s` vào `c`.
 	c := make([]string, len(s))

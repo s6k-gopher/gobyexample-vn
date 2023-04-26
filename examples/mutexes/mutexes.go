@@ -30,8 +30,8 @@ func (c *Container) inc(name string) {
 
 func main() {
 	c := Container{
-		// Lưu ý rằng ta có thể sử dụng giá trị mặc định là không của mutex, do đó 
-		// không cần phải khởi tạo nó. 
+		// Lưu ý rằng ta có thể sử dụng giá trị mặc định là không của mutex, do đó
+		// không cần phải khởi tạo nó.
 		counters: map[string]int{"a": 0, "b": 0},
 	}
 
@@ -46,7 +46,7 @@ func main() {
 		wg.Done()
 	}
 
-	// Thực thi đồng thời nhiều goroutines; lưu ý rằng 
+	// Thực thi đồng thời nhiều goroutines; lưu ý rằng
 	// chúng đều truy cập vào cùng một `Container`,
 	// và hai trong số chúng truy cập vào cùng một biến đếm.
 	wg.Add(3)

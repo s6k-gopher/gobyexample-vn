@@ -1,5 +1,5 @@
 // Trong Go, một _array_ là một chuỗi các phần tử được đánh số của một
-// độ dài cụ thể. Trong Go, [slices](còn được gọi là "lát") 
+// độ dài cụ thể. Trong Go, [slices](còn được gọi là "lát")
 // phổ biến hơn nhiều; array rất hữu ích trong một số trường hợp đặc biệt.
 package main
 
@@ -8,7 +8,7 @@ import "fmt"
 func main() {
 	// Ở đây chúng ta tạo ra một array `a` gồm chính xác
 	// 5 phần tử có loại int. Loại của các phần tử và độ dài
-	// đều thuộc về đặc tính của array. Mặc định, một array rỗng 
+	// đều thuộc về đặc tính của array. Mặc định, một array rỗng
 	// có giá trị zero (zero-valued), có thể hiểu `int` có nghĩa là `0`.
 	var a [5]int
 	fmt.Println("emp:", a)

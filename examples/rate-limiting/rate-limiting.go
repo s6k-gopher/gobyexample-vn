@@ -15,7 +15,7 @@ func main() {
 
 	// Đầu tiên, chúng ta sẽ xem xét một cách cơ bản để thực hiện rate limiting.
 	// Giả sử chúng ta muốn giới hạn việc xử lý các request gửi đến.
-	// Chúng ta sẽ truyền các request này qua một channel 
+	// Chúng ta sẽ truyền các request này qua một channel
 	// có cùng tên.
 	requests := make(chan int, 5)
 	for i := 1; i <= 5; i++ {
@@ -37,7 +37,7 @@ func main() {
 	}
 
 	// Chúng ta có thể muốn cho phép thực hiến một số lượng lớn request trong
-	// một khoảng thời gian ngắn trong khi thực hiện nguyên tắc rate limiting 
+	// một khoảng thời gian ngắn trong khi thực hiện nguyên tắc rate limiting
 	// mà ta đã đặt ra mà vẫn đảm bảo được rate limit của hệ thống. Ta có thể làm được điều này
 	// bằng cách sử dụng một buffered channel `burstyLimiter`. Channel `burstyLimiter` này
 	// sẽ cho phép thực hiện một số lượng lớn request lên đến 3 request trong 1 thời điểm.
@@ -57,8 +57,8 @@ func main() {
 		}
 	}()
 
-	// Bây giờ, ta sẽ giả định thêm 5 request được gửi đến. 
-	// Ba request đầu tiên sẽ hưởng lợi từ khả năng tăng tốc 
+	// Bây giờ, ta sẽ giả định thêm 5 request được gửi đến.
+	// Ba request đầu tiên sẽ hưởng lợi từ khả năng tăng tốc
 	// của channel `burstyLimiter`.
 	burstyRequests := make(chan int, 5)
 	for i := 1; i <= 5; i++ {

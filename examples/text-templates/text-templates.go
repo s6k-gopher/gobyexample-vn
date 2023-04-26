@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	// Ta có thể tạo ra một template mới và truyền vào nội dung của nó 
+	// Ta có thể tạo ra một template mới và truyền vào nội dung của nó
 	// từ một chuỗi.
 	// Template là một sự kết hợp của văn bản tĩnh và các "hành động" (action) được gói trong dấu
 	// `{{...}}`, thứ thường được sử dụng để chèn nội dung động.
@@ -22,13 +22,13 @@ func main() {
 	}
 
 	// Ngoài ra, ta có thể sử dụng hàm `template.Must` để
-	// panic trong trường hợp `Parse` trả về một lỗi. Điều này 
-	// đặc biệt hữu ích cho các template được khởi tạo 
+	// panic trong trường hợp `Parse` trả về một lỗi. Điều này
+	// đặc biệt hữu ích cho các template được khởi tạo
 	// với phạm vi toàn cục (global scope).
 	t1 = template.Must(t1.Parse("Value: {{.}}\n"))
 
-	// Bằng việc "thực thi" template, ta tạo ra nội dung của nó 
-	// với các giá trị cụ thể của các action. Action được đặt trong `{{.}}`  
+	// Bằng việc "thực thi" template, ta tạo ra nội dung của nó
+	// với các giá trị cụ thể của các action. Action được đặt trong `{{.}}`
 	// được thay thế bằng giá trị được truyền vào `Execute` dưới dạng tham số.
 	t1.Execute(os.Stdout, "some text")
 	t1.Execute(os.Stdout, 5)
@@ -53,7 +53,7 @@ func main() {
 		Name string
 	}{"Jane Doe"})
 
-	// Tương tự với maps; với maps thì không có hạn chế về chữ hoa/chữ thường 
+	// Tương tự với maps; với maps thì không có hạn chế về chữ hoa/chữ thường
 	// đối với tên khóa (key names).
 
 	t2.Execute(os.Stdout, map[string]string{
@@ -63,14 +63,14 @@ func main() {
 	// if/else hỗ trợ việc thực thi có điều kiện trong template. Một giá trị được coi là
 	// false nếu nó là giá trị mặc định của một kiểu dữ liệu, ví dụ như 0, một chuỗi rỗng,
 	// con trỏ nil, v.v.
-	// Ví dụ dưới đây minh họa một tính năng khác 
+	// Ví dụ dưới đây minh họa một tính năng khác
 	// của template: loại bỏ các khoảng trắng bằng cách sử dụng `-` trong các action.
 	t3 := Create("t3",
 		"{{if . -}} yes {{else -}} no {{end}}\n")
 	t3.Execute(os.Stdout, "not empty")
 	t3.Execute(os.Stdout, "")
 
-	// Những khối vòng lặp bằng range (range blocks) cho phép ta lặp qua các 
+	// Những khối vòng lặp bằng range (range blocks) cho phép ta lặp qua các
 	// slices, arrays, maps hoặc channels. Trong range block, phần `{{.}}` được gán cho
 	// giá trị phần tử hiện tại của vòng lặp.
 	t4 := Create("t4",

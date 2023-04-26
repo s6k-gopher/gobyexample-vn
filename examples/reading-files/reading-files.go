@@ -62,13 +62,13 @@ func main() {
 	check(err)
 	fmt.Printf("%d bytes @ %d: %s\n", n3, o3, string(b3))
 
-	// Không có chức năng quay lại tích hợp sẵn, 
+	// Không có chức năng quay lại tích hợp sẵn,
 	// nhưng hàm`Seek(0, 0)` có thể thực hiện điều này.
 	_, err = f.Seek(0, 0)
 	check(err)
 
-	// Package  `bufio` triển khai một bộ đệm đọc có thể 
-	// hữu ích vừa vì tính hiệu quả với nhiều lần đọc nhỏ, 
+	// Package  `bufio` triển khai một bộ đệm đọc có thể
+	// hữu ích vừa vì tính hiệu quả với nhiều lần đọc nhỏ,
 	// vừa vì các phương thức đọc bổ sung mà nó cung cấp
 	r4 := bufio.NewReader(f)
 	b4, err := r4.Peek(5)

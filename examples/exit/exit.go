@@ -19,5 +19,5 @@ func main() {
 
 // Lưu ý rằng khác với C, Go không sử dụng giá trị trả về
 // là một số nguyên từ `main` để chỉ ra exit status. Nếu
-// bạn muốn thoát chương trình với một status khác không, 
+// bạn muốn thoát chương trình với một status khác không,
 // bạn nên sử dụng `os.Exit`.

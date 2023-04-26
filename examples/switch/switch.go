@@ -42,7 +42,7 @@ func main() {
 	}
 
 	// Loại của `switch` so sánh các loại với nhau, thay vì so sánh giá trị.
-	// Bạn có thể dùng việc đó để phát hiện loại của giá trị interface. 
+	// Bạn có thể dùng việc đó để phát hiện loại của giá trị interface.
 	// Trong ví dụ này, biến `t` sẽ có loại tương ứng với mệnh đề của nó.
 	whatAmI := func(i interface{}) {
 		switch t := i.(type) {

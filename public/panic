@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Go by Example: Panic</title>
+    <link rel=stylesheet href="site.css">
+  </head>
+  <script>
+      onkeydown = (e) => {
+          
+          if (e.key == "ArrowLeft") {
+              window.location.href = 'sorting-by-functions';
+          }
+          
+          
+          if (e.key == "ArrowRight") {
+              window.location.href = 'defer';
+          }
+          
+      }
+  </script>
+  <body>
+    <div class="example" id="panic">
+      <h2><a href="./">Go by Example</a>: Panic</h2>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p>Một <code>panic</code> thương có nghĩa là một cái gì đó xảy ra
+không như mong đợi. Hầu hết chúng ta sử dụng nó để
+fail fast với các lỗi không nên xảy ra trong quá
+trình hoạt động bình thường, hoặc rằng chúng ta không
+được chuẩn bị để xử lý một cách tốt.</p>
+
+          </td>
+          <td class="code empty leading">
+            
+          
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            <a href="https://go.dev/play/p/CJkK02EpQqs"><img title="Run code" src="play.png" class="run" /></a><img title="Copy code" src="clipboard.png" class="copy" />
+          <pre class="chroma"><span class="kn">package</span> <span class="nx">main</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kn">import</span> <span class="s">&#34;os&#34;</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Chúng ta sẽ dùng panic trên khắp site để kiểm tra
+những lỗi không mong đợi. Đây là chương trình duy
+nhất trên site được thiết kể để panic.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">    <span class="nb">panic</span><span class="p">(</span><span class="s">&#34;a problem&#34;</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Một trường hợp thông thường của panic là để hủy
+bỏ nếu một hàm trả về một giá trị error mà chúng
+ta không biết làm thế nào (hoặc muốn) để xử lý.
+Đây là ví dụ của <code>panic</code> nếu chúng ta lấy
+một lỗi xảy ra không mong đợi khi tạo file.</p>
+
+          </td>
+          <td class="code">
+            
+          <pre class="chroma">
+    <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;/tmp/file&#34;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p>Chạy chương trình sẽ gây ra panic, in một thông báo
+lỗi và dấu vết goroutine, và thoát với một trạng
+thái non-zero.</p>
+
+          </td>
+          <td class="code empty leading">
+            
+          
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Khi panic đầu tiên trong <code>main</code> được bắn ra, chương
+trình thoát mà không đạt đến phần còn lại của code.
+Nếu bạn muốn để xem chương trình hãy thửu tạo một
+tệp tạm thời, comment lại cái panic đầu tiên.</p>
+
+          </td>
+          <td class="code empty leading">
+            
+          
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="gp">$</span> go run panic.go
+<span class="go">panic: a problem</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="go">goroutine 1 [running]:
+</span><span class="go">main.main()
+</span><span class="go">    /.../panic.go:12 +0x47
+</span><span class="go">...
+</span><span class="go">exit status 2</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Lưu ý rằng không giống như một số ngôn ngữ sử dụng
+exception để xử lý nhiều lỗi, trong Go nó là idiomatic
+để sử dụng các giá trị trả về chỉ báo lỗi bất cứ
+khi nào có thể.</p>
+
+          </td>
+          <td class="code empty">
+            
+          
+          </td>
+        </tr>
+        
+      </table>
+      
+      
+      <p class="next">
+        Ví dụ tiếp theo: <a href="defer">Defer</a>.
+      </p>
+      
+
+    <p class="footer">
+      Tác giả <a href="https://markmcgranaghan.com">Mark McGranaghan</a> và <a href="https://eli.thegreenplace.net">Eli Bendersky</a> | <a href="https://github.com/mmcgrana/gobyexample">source</a> | <a href="https://github.com/mmcgrana/gobyexample#license">license</a>
+    </p>
+
+    </div>
+    <script>
+      var codeLines = [];
+      codeLines.push('');codeLines.push('package main\u000A');codeLines.push('import \"os\"\u000A');codeLines.push('func main() {\u000A');codeLines.push('    panic(\"a problem\")\u000A');codeLines.push('    _, err :\u003D os.Create(\"/tmp/file\")\u000A    if err !\u003D nil {\u000A        panic(err)\u000A    }\u000A}\u000A');codeLines.push('');codeLines.push('');codeLines.push('');codeLines.push('');codeLines.push('');
+    </script>
+    <script src="site.js" async></script>
+  </body>
+</html>

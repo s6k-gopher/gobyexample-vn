@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Go by Example: Command-Line Flags</title>
+    <link rel=stylesheet href="site.css">
+  </head>
+  <script>
+      onkeydown = (e) => {
+          
+          if (e.key == "ArrowLeft") {
+              window.location.href = 'command-line-arguments';
+          }
+          
+          
+          if (e.key == "ArrowRight") {
+              window.location.href = 'command-line-subcommands';
+          }
+          
+      }
+  </script>
+  <body>
+    <div class="example" id="command-line-flags">
+      <h2><a href="./">Go by Example</a>: Command-Line Flags</h2>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p><a href="https://en.wikipedia.org/wiki/Command-line_interface#Command-line_option"><em>Command-line flags</em> (cờ dòng lệnh)</a>
+là cách thông thường để chỉ định các tuỳ chọn cho các
+chương chình dòng lệnh. Ví dụ, trong lệnh <code>wc -l</code>, <code>-l</code>
+là một cờ dòng lệnh.</p>
+
+          </td>
+          <td class="code empty leading">
+            
+          
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            <a href="https://go.dev/play/p/zdRrGlxUMno"><img title="Run code" src="play.png" class="run" /></a><img title="Copy code" src="clipboard.png" class="copy" />
+          <pre class="chroma"><span class="kn">package</span> <span class="nx">main</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Go cung cấp một package (gói) <code>flag</code> hỗ trợ cơ bản cho phân tích
+cú pháp các command-line flag. Chúng ta sẽ sử dụng package để
+hiện thực chương trình dòng lệnh ví dụ của mình.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;flag&#34;</span>
+    <span class="s">&#34;fmt&#34;</span>
+<span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Các khai báo cờ cơ bản có sẵn cho các tùy chọn chuỗi
+số nguyên, và luận lí. Ở đây chúng ta khai báo một
+cờ chuỗi <code>word</code> với giá trị mặc định <code>&quot;foo&quot;</code> và một
+mô tả ngắn. Hàm <code>flag.String</code> nãy trả về một
+con trỏ chuỗi (không phải là một giá trị chuỗi);
+chúng ta sẽ thấy cách sử dụng con trỏ này bên dưới.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">wordPtr</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">String</span><span class="p">(</span><span class="s">&#34;word&#34;</span><span class="p">,</span> <span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;a string&#34;</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Đây là các khai báo cờ <code>numb</code> and <code>fork</code>, sử dụng một
+cách tiếp cận tương tự với cờ <code>word</code>.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">numbPtr</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">Int</span><span class="p">(</span><span class="s">&#34;numb&#34;</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="s">&#34;an int&#34;</span><span class="p">)</span>
+    <span class="nx">forkPtr</span> <span class="o">:=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">Bool</span><span class="p">(</span><span class="s">&#34;fork&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;a bool&#34;</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Cũng có thể khai báo một tùy chọn sử dụng một biến
+đã được khai báo ở một nơi khác trong chương trình.
+Lưu ý rằng chúng ta cần truyền vào một con trỏ tới
+hàm khai báo cờ.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="kd">var</span> <span class="nx">svar</span> <span class="kt">string</span>
+    <span class="nx">flag</span><span class="p">.</span><span class="nf">StringVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">svar</span><span class="p">,</span> <span class="s">&#34;svar&#34;</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">,</span> <span class="s">&#34;a string var&#34;</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Sau khi tất cả các cờ đã được khai báo, gọi <code>flag.Parse()</code>
+để thực thi phân tích cú pháp dòng lệnh.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">flag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Ở đây chúng ta chỉ đơn giản là in ra các tùy chọn
+đã được phân tích cú pháp và bất kỳ đối số vị trí
+dư thừa nào. Chú ý rằng chúng ta cần huỷ tham chiếu
+các con trỏ để lấy giá trị tùy chọn thực sự, ví dụ <code>*wordPtr</code></p>
+
+          </td>
+          <td class="code">
+            
+          <pre class="chroma">
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;word:&#34;</span><span class="p">,</span> <span class="o">*</span><span class="nx">wordPtr</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;numb:&#34;</span><span class="p">,</span> <span class="o">*</span><span class="nx">numbPtr</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;fork:&#34;</span><span class="p">,</span> <span class="o">*</span><span class="nx">forkPtr</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;svar:&#34;</span><span class="p">,</span> <span class="nx">svar</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;tail:&#34;</span><span class="p">,</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">Args</span><span class="p">())</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p>Để thử nghiệm chương trình các cờ dòng lệnh,
+trước tiên là biên dịch nó và chạy tệp nhị phân
+kết quả trực tiếp.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="gp">$</span> go build command-line-flags.go</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Hãy thử chương trình đã xây dựng bằng cách cung cấp
+giá trị cho tất cả các cờ</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="gp">$</span> ./command-line-flags -word=opt -numb=7 -fork -svar=flag
+<span class="go">word: opt
+</span><span class="go">numb: 7
+</span><span class="go">fork: true
+</span><span class="go">svar: flag
+</span><span class="go">tail: []</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Lưu ý rằng nếu bạn bỏ qua các cờ chúng sẽ tự động
+lấy giá trị mặc định của chúng.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="gp">$</span> ./command-line-flags -word=opt
+<span class="go">word: opt
+</span><span class="go">numb: 42
+</span><span class="go">fork: false
+</span><span class="go">svar: bar
+</span><span class="go">tail: []</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Đối số vị trí theo sau có thể được cung cấp sau
+bất kỳ cờ nào.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="gp">$</span> ./command-line-flags -word=opt a1 a2 a3
+<span class="go">word: opt
+</span><span class="go">...
+</span><span class="go">tail: [a1 a2 a3]</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Lưu ý rằng package (gói) <code>flag</code> yêu cầu tất cả
+các cờ xuất hiện trước các đối số vị trí (nếu không
+các cờ sẽ được hiểu là các đối số vị trí).</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="gp">$</span> ./command-line-flags -word=opt a1 a2 a3 -numb=7
+<span class="go">word: opt
+</span><span class="go">numb: 42
+</span><span class="go">fork: false
+</span><span class="go">svar: bar
+</span><span class="go">tail: [a1 a2 a3 -numb=7]</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Sử dụng cờ <code>-h</code> hoặc <code>--help</code> để nhân văn bản
+trợ giúp được tạo tự động cho chương trình dòng lệnh.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="gp">$</span> ./command-line-flags -h
+<span class="go">Usage of ./command-line-flags:
+</span><span class="go">  -fork=false: a bool
+</span><span class="go">  -numb=42: an int
+</span><span class="go">  -svar=&#34;bar&#34;: a string var
+</span><span class="go">  -word=&#34;foo&#34;: a string</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Nếu bạn cung cấp một cờ mà không được chỉ định
+cho package <code>flag</code>, chương trình sẽ in thông báo
+lỗi và hiển thị văn bản trợ giúp</p>
+
+          </td>
+          <td class="code">
+            
+          <pre class="chroma">
+<span class="gp">$</span> ./command-line-flags -wat
+<span class="go">flag provided but not defined: -wat
+</span><span class="go">Usage of ./command-line-flags:
+</span><span class="go">...</span></pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      
+      <p class="next">
+        Ví dụ tiếp theo: <a href="command-line-subcommands">Command-Line Subcommands</a>.
+      </p>
+      
+
+    <p class="footer">
+      Tác giả <a href="https://markmcgranaghan.com">Mark McGranaghan</a> và <a href="https://eli.thegreenplace.net">Eli Bendersky</a> | <a href="https://github.com/mmcgrana/gobyexample">source</a> | <a href="https://github.com/mmcgrana/gobyexample#license">license</a>
+    </p>
+
+    </div>
+    <script>
+      var codeLines = [];
+      codeLines.push('');codeLines.push('package main\u000A');codeLines.push('import (\u000A    \"flag\"\u000A    \"fmt\"\u000A)\u000A');codeLines.push('func main() {\u000A');codeLines.push('    wordPtr :\u003D flag.String(\"word\", \"foo\", \"a string\")\u000A');codeLines.push('    numbPtr :\u003D flag.Int(\"numb\", 42, \"an int\")\u000A    forkPtr :\u003D flag.Bool(\"fork\", false, \"a bool\")\u000A');codeLines.push('    var svar string\u000A    flag.StringVar(\u0026svar, \"svar\", \"bar\", \"a string var\")\u000A');codeLines.push('    flag.Parse()\u000A');codeLines.push('    fmt.Println(\"word:\", *wordPtr)\u000A    fmt.Println(\"numb:\", *numbPtr)\u000A    fmt.Println(\"fork:\", *forkPtr)\u000A    fmt.Println(\"svar:\", svar)\u000A    fmt.Println(\"tail:\", flag.Args())\u000A}\u000A');codeLines.push('');codeLines.push('');codeLines.push('');codeLines.push('');codeLines.push('');codeLines.push('');codeLines.push('');
+    </script>
+    <script src="site.js" async></script>
+  </body>
+</html>

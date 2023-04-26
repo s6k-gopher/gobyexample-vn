@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Go by Example: Time Formatting / Parsing</title>
+    <link rel=stylesheet href="site.css">
+  </head>
+  <script>
+      onkeydown = (e) => {
+          
+          if (e.key == "ArrowLeft") {
+              window.location.href = 'epoch';
+          }
+          
+          
+          if (e.key == "ArrowRight") {
+              window.location.href = 'random-numbers';
+          }
+          
+      }
+  </script>
+  <body>
+    <div class="example" id="time-formatting-parsing">
+      <h2><a href="./">Go by Example</a>: Time Formatting / Parsing</h2>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p>Go hỗ trợ định dạng và phân tích thời gian
+thông qua các layout dựa trên patterns.</p>
+
+          </td>
+          <td class="code leading">
+            <a href="https://go.dev/play/p/FpDe57aPyVx"><img title="Run code" src="play.png" class="run" /></a><img title="Copy code" src="clipboard.png" class="copy" />
+          <pre class="chroma">
+<span class="kn">package</span> <span class="nx">main</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">p</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Dưới đây là một ví dụ cơ bản về định dạng thời gian
+theo RFC3339, sử dụng hằng số layout tương ứng.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">t</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">()</span>
+    <span class="nf">p</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">RFC3339</span><span class="p">))</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Phân tích thời gian sử dụng cùng các giá trị layout
+với <code>Format</code>.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">t1</span><span class="p">,</span> <span class="nx">e</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span>
+        <span class="nx">time</span><span class="p">.</span><span class="nx">RFC3339</span><span class="p">,</span>
+        <span class="s">&#34;2012-11-01T22:08:41+00:00&#34;</span><span class="p">)</span>
+    <span class="nf">p</span><span class="p">(</span><span class="nx">t1</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p><code>Format</code> và <code>Parse</code> sử dụng các layout dựa trên ví dụ.
+Thông thường bạn sẽ sử dụng một hằng số từ package <code>time</code> cho
+các layout này, nhưng bạn cũng có thể cung cấp các layout
+tùy chỉnh. Các layout phải sử dụng thời gian tham chiếu
+<code>Mon Jan 2 15:04:05 MST 2006</code> để hiển thị pattern dùng để
+định dạng/ phân tích một đối tượng time/chuỗi thời gian cho trước.
+Thời gian được dùng làm ví dụ phải chính xác như sau: năm 2006,
+15 cho giờ, Monday cho ngày trong tuần, v.v.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nf">p</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span><span class="s">&#34;3:04PM&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span><span class="s">&#34;Mon Jan _2 15:04:05 2006&#34;</span><span class="p">))</span>
+    <span class="nf">p</span><span class="p">(</span><span class="nx">t</span><span class="p">.</span><span class="nf">Format</span><span class="p">(</span><span class="s">&#34;2006-01-02T15:04:05.999999-07:00&#34;</span><span class="p">))</span>
+    <span class="nx">form</span> <span class="o">:=</span> <span class="s">&#34;3 04 PM&#34;</span>
+    <span class="nx">t2</span><span class="p">,</span> <span class="nx">e</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span><span class="nx">form</span><span class="p">,</span> <span class="s">&#34;8 41 PM&#34;</span><span class="p">)</span>
+    <span class="nf">p</span><span class="p">(</span><span class="nx">t2</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Để biểu diễn theo dạng số, bạn cũng có thể sử dụng
+chuỗi định dạng chuẩn với các thành phần được trích xuất
+từ giá trị thời gian.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%d-%02d-%02dT%02d:%02d:%02d-00:00\n&#34;</span><span class="p">,</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Year</span><span class="p">(),</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Month</span><span class="p">(),</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Day</span><span class="p">(),</span>
+        <span class="nx">t</span><span class="p">.</span><span class="nf">Hour</span><span class="p">(),</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Minute</span><span class="p">(),</span> <span class="nx">t</span><span class="p">.</span><span class="nf">Second</span><span class="p">())</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p><code>Parse</code> sẽ trả về một lỗi khi đầu vào bị lỗi
+để giải thích vấn đề khi phân tích thời gian.</p>
+
+          </td>
+          <td class="code">
+            
+          <pre class="chroma">
+    <span class="nx">ansic</span> <span class="o">:=</span> <span class="s">&#34;Mon Jan _2 15:04:05 2006&#34;</span>
+    <span class="nx">_</span><span class="p">,</span> <span class="nx">e</span> <span class="p">=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span><span class="nx">ansic</span><span class="p">,</span> <span class="s">&#34;8:41PM&#34;</span><span class="p">)</span>
+    <span class="nf">p</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code">
+            
+          <pre class="chroma"><span class="gp">$</span> go run time-formatting-parsing.go 
+<span class="go">2014-04-15T18:00:15-07:00
+</span><span class="go">2012-11-01 22:08:41 +0000 +0000
+</span><span class="go">6:00PM
+</span><span class="go">Tue Apr 15 18:00:15 2014
+</span><span class="go">2014-04-15T18:00:15.161182-07:00
+</span><span class="go">0000-01-01 20:41:00 +0000 UTC
+</span><span class="go">2014-04-15T18:00:15-00:00
+</span><span class="go">parsing time &#34;8:41PM&#34; as &#34;Mon Jan _2 15:04:05 2006&#34;: ...</span></pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      
+      <p class="next">
+        Ví dụ tiếp theo: <a href="random-numbers">Random Numbers</a>.
+      </p>
+      
+
+    <p class="footer">
+      Tác giả <a href="https://markmcgranaghan.com">Mark McGranaghan</a> và <a href="https://eli.thegreenplace.net">Eli Bendersky</a> | <a href="https://github.com/mmcgrana/gobyexample">source</a> | <a href="https://github.com/mmcgrana/gobyexample#license">license</a>
+    </p>
+
+    </div>
+    <script>
+      var codeLines = [];
+      codeLines.push('package main\u000A');codeLines.push('import (\u000A    \"fmt\"\u000A    \"time\"\u000A)\u000A');codeLines.push('func main() {\u000A    p :\u003D fmt.Println\u000A');codeLines.push('    t :\u003D time.Now()\u000A    p(t.Format(time.RFC3339))\u000A');codeLines.push('    t1, e :\u003D time.Parse(\u000A        time.RFC3339,\u000A        \"2012-11-01T22:08:41+00:00\")\u000A    p(t1)\u000A');codeLines.push('    p(t.Format(\"3:04PM\"))\u000A    p(t.Format(\"Mon Jan _2 15:04:05 2006\"))\u000A    p(t.Format(\"2006-01-02T15:04:05.999999-07:00\"))\u000A    form :\u003D \"3 04 PM\"\u000A    t2, e :\u003D time.Parse(form, \"8 41 PM\")\u000A    p(t2)\u000A');codeLines.push('    fmt.Printf(\"%d-%02d-%02dT%02d:%02d:%02d-00:00\\n\",\u000A        t.Year(), t.Month(), t.Day(),\u000A        t.Hour(), t.Minute(), t.Second())\u000A');codeLines.push('    ansic :\u003D \"Mon Jan _2 15:04:05 2006\"\u000A    _, e \u003D time.Parse(ansic, \"8:41PM\")\u000A    p(e)\u000A}\u000A');codeLines.push('');
+    </script>
+    <script src="site.js" async></script>
+  </body>
+</html>

@@ -17,7 +17,7 @@ func check(e error) {
 
 func main() {
 
-	// Để bắt đầu, đây là cách dump một chuỗi (hoặc 
+	// Để bắt đầu, đây là cách dump một chuỗi (hoặc
 	// chỉ các byte) vào tập tin.
 	// bytes) into a file.
 	d1 := []byte("hello\ngo\n")

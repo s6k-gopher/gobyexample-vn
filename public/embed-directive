@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Go by Example: Embed Directive</title>
+    <link rel=stylesheet href="site.css">
+  </head>
+  <script>
+      onkeydown = (e) => {
+          
+          if (e.key == "ArrowLeft") {
+              window.location.href = 'temporary-files-and-directories';
+          }
+          
+          
+          if (e.key == "ArrowRight") {
+              window.location.href = 'testing-and-benchmarking';
+          }
+          
+      }
+  </script>
+  <body>
+    <div class="example" id="embed-directive">
+      <h2><a href="./">Go by Example</a>: Embed Directive</h2>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p><code>//go:embed</code> là một <a href="https://pkg.go.dev/cmd/compile#hdr-Compiler_Directives">compiler directive</a>
+cho phép chương trình chứa các file và thư mục tùy ý
+trong Go ở build time. Đọc thêm về embed directive
+<a href="https://pkg.go.dev/embed">ở đây</a>.</p>
+
+          </td>
+          <td class="code leading">
+            <a href="https://go.dev/play/p/TCexK-80M1F"><img title="Run code" src="play.png" class="run" /></a><img title="Copy code" src="clipboard.png" class="copy" />
+          <pre class="chroma">
+<span class="kn">package</span> <span class="nx">main</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Import gói <code>embed</code>; nếu bạn không dùng bất kì
+export nào từ package này, bạn có thể để trống với
+<code>_ &quot;embed&quot;</code>.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;embed&#34;</span>
+<span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p><code>embed</code> directive cho phép đường dẫn tương đối với thư
+mục chứa file source Go. Directive này nhúng nội dung
+của file vào trong biến <code>string</code> ngay sau nó.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="c1">//go:embed folder/single_file.txt
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">fileString</span> <span class="kt">string</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Hoặc nhúng nội dung của file vào trong một <code>[]byte</code></p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="c1">//go:embed folder/single_file.txt
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">fileByte</span> <span class="p">[]</span><span class="kt">byte</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Chúng ta có thể nhúng nhiều file hoặc thậm chí thư mục
+với wildcard. Điều này sử dụng một biến thuộc kiểu
+<a href="https://pkg.go.dev/embed#FS">embed.FS type</a>, thực
+hiện một file system ảo đơn giản.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="c1">//go:embed folder/single_file.txt
+</span><span class="c1">//go:embed folder/*.hash
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">folder</span> <span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Print out the contents of <code>single_file.txt</code>.
+In ra nội dung của <code>single_file.txt</code></p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nb">print</span><span class="p">(</span><span class="nx">fileString</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">fileByte</span><span class="p">))</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Truy xuất một số file từ thư mục được nhúng.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">content1</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">folder</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="s">&#34;folder/file1.hash&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">content1</span><span class="p">))</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code">
+            
+          <pre class="chroma">    <span class="nx">content2</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">folder</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="s">&#34;folder/file2.hash&#34;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">content2</span><span class="p">))</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p>Sử dụng những lệnh này để chạy example.
+(Lưu ý: bởi vì giới hạn của go payground,
+example này chỉ được chọn trên máy cá nhân).</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="gp">$</span> mkdir -p folder
+<span class="gp">$</span> echo &#34;hello go&#34; &gt; folder/single_file.txt
+<span class="gp">$</span> echo &#34;123&#34; &gt; folder/file1.hash
+<span class="gp">$</span> echo &#34;456&#34; &gt; folder/file2.hash</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code">
+            
+          <pre class="chroma"><span class="gp">$</span> go run embed-directive.go
+<span class="go">hello go
+</span><span class="go">hello go
+</span><span class="go">123
+</span><span class="go">456</span></pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      
+      <p class="next">
+        Ví dụ tiếp theo: <a href="testing-and-benchmarking">Testing and Benchmarking</a>.
+      </p>
+      
+
+    <p class="footer">
+      Tác giả <a href="https://markmcgranaghan.com">Mark McGranaghan</a> và <a href="https://eli.thegreenplace.net">Eli Bendersky</a> | <a href="https://github.com/mmcgrana/gobyexample">source</a> | <a href="https://github.com/mmcgrana/gobyexample#license">license</a>
+    </p>
+
+    </div>
+    <script>
+      var codeLines = [];
+      codeLines.push('package main\u000A');codeLines.push('import (\u000A    \"embed\"\u000A)\u000A');codeLines.push('//go:embed folder/single_file.txt\u000Avar fileString string\u000A');codeLines.push('//go:embed folder/single_file.txt\u000Avar fileByte []byte\u000A');codeLines.push('//go:embed folder/single_file.txt\u000A//go:embed folder/*.hash\u000Avar folder embed.FS\u000A');codeLines.push('func main() {\u000A');codeLines.push('    print(fileString)\u000A    print(string(fileByte))\u000A');codeLines.push('    content1, _ :\u003D folder.ReadFile(\"folder/file1.hash\")\u000A    print(string(content1))\u000A');codeLines.push('    content2, _ :\u003D folder.ReadFile(\"folder/file2.hash\")\u000A    print(string(content2))\u000A}\u000A');codeLines.push('');codeLines.push('');
+    </script>
+    <script src="site.js" async></script>
+  </body>
+</html>

@@ -24,7 +24,7 @@ func worker(id int, jobs <-chan int, results chan<- int) {
 
 func main() {
 
-	// Để sử dụng pool worker của chúng ta, ta cần gửi 
+	// Để sử dụng pool worker của chúng ta, ta cần gửi
 	// tác vụ cho chúng và thu thập kết quả. Ta sẽ tạo
 	// 2 channel để thực hiện việc này.
 	const numJobs = 5
@@ -46,7 +46,7 @@ func main() {
 
 	// Cuối cùng, ta thu thập tất cả các kết quả xử lý các tác vụ.
 	// Điều này cũng đảm bảo rằng các goroutine worker đã hoàn thành.
-	// Một cách khác để đợi kết quả từ nhiều 
+	// Một cách khác để đợi kết quả từ nhiều
 	// goroutine là sử dụng [WaitGroup](waitgroups).
 	for a := 1; a <= numJobs; a++ {
 		<-results

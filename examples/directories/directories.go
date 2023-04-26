@@ -17,7 +17,7 @@ func check(e error) {
 
 func main() {
 
-	// Tạo một thư mục con mới trong thư mục 
+	// Tạo một thư mục con mới trong thư mục
 	// làm việc hiện tại.
 	err := os.Mkdir("subdir", 0755)
 	check(err)

@@ -21,7 +21,7 @@ func main() {
 	fooEnable := fooCmd.Bool("enable", false, "enable")
 	fooName := fooCmd.String("name", "", "name")
 
-	// Đối với một lệnh con khác, chúng ta có thể 
+	// Đối với một lệnh con khác, chúng ta có thể
 	// xác định các cờ được hỗ trợ khác nhau.
 	barCmd := flag.NewFlagSet("bar", flag.ExitOnError)
 	barLevel := barCmd.Int("level", 0, "level")

@@ -13,7 +13,7 @@ import (
 
 func main() {
 
-	// Tickers sử dụng một cơ chế tương tự như timers: một 
+	// Tickers sử dụng một cơ chế tương tự như timers: một
 	// channel được gửi các giá trị. Ở đây chúng ta sẽ sử dụng hàm
 	// `select` có sẵn trên channel để chờ các giá trị được
 	// gửi đến mỗi 500ms.

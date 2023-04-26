@@ -26,7 +26,7 @@ func main() {
 	fmt.Printf("struct2: %+v\n", p)
 
 	// Biến thể `%#v` sẽ in ra một cú pháp Go đại diện
-	// cho giá trị, ví dụ, một đoạn mã nguồn để 
+	// cho giá trị, ví dụ, một đoạn mã nguồn để
 	// tạo ra giá trị đó.
 	fmt.Printf("struct3: %#v\n", p)
 
@@ -43,7 +43,7 @@ func main() {
 	// Dưới đây sẽ in ra dạng nhị phân của số nguyên.
 	fmt.Printf("bin: %b\n", 14)
 
-	// Dưới đây sẽ in ra kí tự tương ứng với 
+	// Dưới đây sẽ in ra kí tự tương ứng với
 	// giá trị số nguyên được truyền vào.
 	fmt.Printf("char: %c\n", 33)
 
@@ -74,7 +74,7 @@ func main() {
 	fmt.Printf("pointer: %p\n", &p)
 
 	// Khi định dạng số, bạn sẽ thường muốn kiểm soát
-	// độ rộng và số các chữ số thập phân của kết quả. 
+	// độ rộng và số các chữ số thập phân của kết quả.
 	// Để chỉ định độ rộng của một số nguyên, sử dụng một
 	// số sau dấu `%` trong biểu thức. Mặc định, kết quả
 	// sẽ được căn phải và đệm bằng khoảng trắng.
@@ -90,14 +90,14 @@ func main() {
 
 	// Bạn cũng có thể muốn kiểm soát độ rộng khi định dạng
 	// chuỗi, đặc biệt là để đảm bảo rằng chúng căn chỉnh
-	// dưới dạng bảng khi in ra. Để căn phải với một độ rộng 
+	// dưới dạng bảng khi in ra. Để căn phải với một độ rộng
 	// một cách cơ bản ta làm như sau.
 	fmt.Printf("width4: |%6s|%6s|\n", "foo", "b")
 
 	// Để căn trái, sử dụng dấu `-` tương tự như với số.
 	fmt.Printf("width5: |%-6s|%-6s|\n", "foo", "b")
 
-	// Đến giờ chúng ta đã được xem về `Printf`, hàm in 
+	// Đến giờ chúng ta đã được xem về `Printf`, hàm in
 	// chuỗi đã được định dạng ra `os.Stdout`. `Sprintf` định
 	// dạng và trả về một chuỗi mà không in ra bất cứ đâu.
 	s := fmt.Sprintf("sprintf: a %s", "string")

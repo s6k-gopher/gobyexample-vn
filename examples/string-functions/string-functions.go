@@ -19,7 +19,7 @@ func main() {
 	// `strings`. Vì đây là các hàm của thư viện, chứ không phải
 	// là các phương thức của đối tượng string, nên chúng ta cần
 	// truyền vào chuỗi cần truy vấn vào vị trí đối số đầu tiên của hàm.
-	// Bạn có thể tìm thêm các hàm trong thư viện 
+	// Bạn có thể tìm thêm các hàm trong thư viện
 	// [`strings`](https://pkg.go.dev/strings) từ tài liệu của nó.
 	p("Contains:  ", s.Contains("test", "es"))
 	p("Count:     ", s.Count("test", "t"))

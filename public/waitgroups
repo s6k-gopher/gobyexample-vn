@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Go by Example: WaitGroups</title>
+    <link rel=stylesheet href="site.css">
+  </head>
+  <script>
+      onkeydown = (e) => {
+          
+          if (e.key == "ArrowLeft") {
+              window.location.href = 'worker-pools';
+          }
+          
+          
+          if (e.key == "ArrowRight") {
+              window.location.href = 'rate-limiting';
+          }
+          
+      }
+  </script>
+  <body>
+    <div class="example" id="waitgroups">
+      <h2><a href="./">Go by Example</a>: WaitGroups</h2>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            <p>Để đợi nhiều goroutine kết thúc, ta có thể sử dụng
+<em>wait group</em>.</p>
+
+          </td>
+          <td class="code leading">
+            <a href="https://go.dev/play/p/kCO_0FXzQtB"><img title="Run code" src="play.png" class="run" /></a><img title="Copy code" src="clipboard.png" class="copy" />
+          <pre class="chroma">
+<span class="kn">package</span> <span class="nx">main</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;sync&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+<span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Đây sẽ là hàm mà ta sẽ chạy trong mỗi goroutine.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+<span class="kd">func</span> <span class="nf">worker</span><span class="p">(</span><span class="nx">id</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Worker %d starting\n&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Dừng một khoảng để giả lập một tác vụ ngốn rất nhiều thời gian.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Worker %d done\n&#34;</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span>
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>WaitGroup này được dùng để đợi cho tất cả các goroutine
+được khởi tạo ở đây chạy xong. Lưu ý: nếu một WaitGroup được
+truyền vào các hàm, nó nên được truyền bằng cách <em>sử dụng con trỏ</em>.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="kd">var</span> <span class="nx">wg</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Khởi chạy một vài goroutine và tăng giá trị số lượng của WaitGroup
+cho mỗi goroutine.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+        <span class="nx">wg</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Tránh việc sử dụng lại cùng một giá trị <code>i</code> trong mỗi closure của goroutine.
+Đọc <a href="https://golang.org/doc/faq#closures_and_goroutines">FAQ</a></p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+        <span class="nx">i</span> <span class="o">:=</span> <span class="nx">i</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Bọc hàm gọi worker trong một closure để đảm bảo rằng
+WaitGroup sẽ được thông báo khi một worker kết thúc. Bằng cách này
+worker không cần phải quan tâm đến các kiểu nguyên thuỷ của concurrency
+(concurrency primitives) trong quá trình thực thi.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+        <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">defer</span> <span class="nx">wg</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+            <span class="nf">worker</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+        <span class="p">}()</span>
+    <span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Chặn cho đến khi giá trị số lượng của WaitGroup trở về 0, tức là
+tất cả các worker đã thông báo rằng chúng đã chạy xong.</p>
+
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma">
+    <span class="nx">wg</span><span class="p">.</span><span class="nf">Wait</span><span class="p">()</span>
+</pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Chú ý rằng: phương pháp này không có cách nào
+để truyền lỗi trực tiếp từ các worker. Để sử dụng
+trong các trường hợp nâng cao hơn, hãy xem xét sử dụng
+<a href="https://pkg.go.dev/golang.org/x/sync/errgroup">errgroup package</a>.</p>
+
+          </td>
+          <td class="code">
+            
+          <pre class="chroma">
+<span class="p">}</span>
+</pre>
+          </td>
+        </tr>
+        
+      </table>
+      
+      <table>
+        
+        <tr>
+          <td class="docs">
+            
+          </td>
+          <td class="code leading">
+            
+          <pre class="chroma"><span class="gp">$</span> go run waitgroups.go
+<span class="go">Worker 5 starting
+</span><span class="go">Worker 3 starting
+</span><span class="go">Worker 4 starting
+</span><span class="go">Worker 1 starting
+</span><span class="go">Worker 2 starting
+</span><span class="go">Worker 4 done
+</span><span class="go">Worker 1 done
+</span><span class="go">Worker 2 done
+</span><span class="go">Worker 5 done
+</span><span class="go">Worker 3 done</span></pre>
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="docs">
+            <p>Thứ tự các worker khởi chạy và hoàn thành
+có thể khác nhau cho mỗi lần chúng được gọi.</p>
+
+          </td>
+          <td class="code empty">
+            
+          
+          </td>
+        </tr>
+        
+      </table>
+      
+      
+      <p class="next">
+        Ví dụ tiếp theo: <a href="rate-limiting">Rate Limiting</a>.
+      </p>
+      
+
+    <p class="footer">
+      Tác giả <a href="https://markmcgranaghan.com">Mark McGranaghan</a> và <a href="https://eli.thegreenplace.net">Eli Bendersky</a> | <a href="https://github.com/mmcgrana/gobyexample">source</a> | <a href="https://github.com/mmcgrana/gobyexample#license">license</a>
+    </p>
+
+    </div>
+    <script>
+      var codeLines = [];
+      codeLines.push('package main\u000A');codeLines.push('import (\u000A    \"fmt\"\u000A    \"sync\"\u000A    \"time\"\u000A)\u000A');codeLines.push('func worker(id int) {\u000A    fmt.Printf(\"Worker %d starting\\n\", id)\u000A');codeLines.push('    time.Sleep(time.Second)\u000A    fmt.Printf(\"Worker %d done\\n\", id)\u000A}\u000A');codeLines.push('func main() {\u000A');codeLines.push('    var wg sync.WaitGroup\u000A');codeLines.push('    for i :\u003D 1; i \u003C\u003D 5; i++ {\u000A        wg.Add(1)\u000A');codeLines.push('        i :\u003D i\u000A');codeLines.push('        go func() {\u000A            defer wg.Done()\u000A            worker(i)\u000A        }()\u000A    }\u000A');codeLines.push('    wg.Wait()\u000A');codeLines.push('}\u000A');codeLines.push('');codeLines.push('');
+    </script>
+    <script src="site.js" async></script>
+  </body>
+</html>

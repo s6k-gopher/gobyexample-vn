@@ -1,4 +1,4 @@
-// Một _line filter_ (bộ lọc dòng) là chương trình phổ biến đọc 
+// Một _line filter_ (bộ lọc dòng) là chương trình phổ biến đọc
 // đầu vào từ stdin, xử lí và đưa ra kết quả được
 // dẫn xuất trên stdout. `grep` and `sed` là các
 // line filter phổ biến
@@ -18,7 +18,7 @@ import (
 
 func main() {
 
-	// Bao bọc `os.Stdin` không bộ đệm với một scanner 
+	// Bao bọc `os.Stdin` không bộ đệm với một scanner
 	// (bộ quét) có bộ đệm đem lại cho chúng ta một
 	// phương thức quét thuận tiện mà tiến hành scanner đến
 	// thông tin tiếp theo; mặc định là dòng tiếp theo trong

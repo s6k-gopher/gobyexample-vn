@@ -14,15 +14,15 @@ func main() {
 
 	// `Join` nên được sử dụng để xây dựng các đường dẫn
 	// theo cách có thể dùng trên nhiều hệ điều hành
-	// khác nhau. Hàm nhận vào bất kì số lượng đối số 
-	// và xây dựng một đường dẫn theo cấu trúc 
+	// khác nhau. Hàm nhận vào bất kì số lượng đối số
+	// và xây dựng một đường dẫn theo cấu trúc
 	// phân cấp từ chúng.
 	p := filepath.Join("dir1", "dir2", "filename")
 	fmt.Println("p:", p)
 
 	// Bạn nên luôn sử dụng `Join` thay vì nối các kí tự
 	// `/`s or `\`s thủ công. Ngoài việc cung cấp khả năng
-	// sử dụng trên nhiều hệ điều hành, `Join` cũng 
+	// sử dụng trên nhiều hệ điều hành, `Join` cũng
 	// chuẩn hóa đường dẫn bằng cách loại bỏ các bộ phận
 	// phân cách không cần thiết và thay đổi thư mục.
 	fmt.Println(filepath.Join("dir1//", "filename"))
