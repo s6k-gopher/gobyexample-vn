@@ -46,7 +46,7 @@ và đi đến `http://127.0.0.1:8000/` ở trong trình duyệt của bạn.
 
 ### Publishing
 
-To upload the site:
+Để upload trang:
 
 ```console
 $ export AWS_ACCESS_KEY_ID=...
