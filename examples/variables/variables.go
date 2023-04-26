@@ -1,15 +1,12 @@
-// In Go, _variables_ are explicitly declared and used by
-// the compiler to e.g. check type-correctness of function
-// calls.
 // Trong go, biến được khai báo rõ ràng và sử dụng bởi
-// trình biên dịch để, ví dụ như kiểm tra đúng loại (type) của hàm gọi
+// trình biên dịch để, ví dụ như kiểm tra đúng loại (type) của hàm gọi.
 package main
 
 import "fmt"
 
 func main() {
 
-	// `var` declares 1 or more variables.
+	// `var` khai báo 1 hoặc nhiều biến.
 	var a = "initial"
 	fmt.Println(a)
 

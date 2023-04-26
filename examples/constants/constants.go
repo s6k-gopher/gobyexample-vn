@@ -1,5 +1,5 @@
 // Go hỗ trợ _constants_ (hằng) của character (ký tự), string (chuỗi), boolean (kiểu boolean)
-// và các loại giá trị số
+// và các loại giá trị số.
 
 package main
 
